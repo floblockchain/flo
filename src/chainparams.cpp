@@ -81,9 +81,7 @@ public:
         consensus.BIP34Hash = uint256S("fa09d204a83a768ed5a7c8d441fa62f2043abf420cff1226c7b4329aeb9d51cf");
         consensus.BIP65Height = 918684; // bab3041e8977e0dc3eeff63fe707b92bde1dd449d8efafb248c27c8264cc311a
         consensus.BIP66Height = 811879; // 7aceee012833fa8952f8835d8b1b3ae233cd6ab08fdb27a771d2bd7bdc491894
-        consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); 
-        consensus.nPowTargetTimespan = 60 * 60; // V1 difficulty for now
-        consensus.nPowTargetSpacing = 40; // V1 difficulty for now
+        consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.fPowNoRetargeting = false;
         consensus.nRuleChangeActivationThreshold = 6048; // 75% of 8064
@@ -107,6 +105,27 @@ public:
 
         // By default assume that the signatures in ancestors of this block are valid.
         consensus.defaultAssumeValid = uint256S("0x4a8cb5ca397b7c92c270ccfa9139ffb93f7c5b9515e52486c635c7a1dee9d221"); // 2000000
+
+        // Difficulty adjustments
+        consensus.nPowTargetSpacing = 40; // 40s block time
+        // V1
+        consensus.nTargetTimespan_Version1 = 60 * 60;
+        consensus.nInterval_Version1 = 60 * 60 / 40;
+        consensus.nMaxAdjustUp_Version1 = 75;
+        consensus.nMaxAdjustDown_Version1 = 300;
+        consensus.nAveragingInterval_Version1 = consensus.nInterval_Version1;
+        // V2
+        consensus.nHeight_Difficulty_Version2 = 208440;
+        consensus.nInterval_Version2 = 15;
+        consensus.nMaxAdjustDown_Version2 = 75;
+        consensus.nMaxAdjustUp_Version2 = 300;
+        consensus.nAveragingInterval_Version2 = consensus.nInterval_Version2;
+        // V3
+        consensus.nHeight_Difficulty_Version3 = 426000;
+        consensus.nInterval_Version3 = 1;
+        consensus.nMaxAdjustDown_Version3 = 3;
+        consensus.nMaxAdjustUp_Version3 = 2;
+        consensus.nAveragingInterval_Version3 = 6;
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -191,7 +210,6 @@ public:
         consensus.BIP65Height = 76; // 8075c771ed8b495ffd943980a95f702ab34fce3c8c54e379548bda33cc8c0573
         consensus.BIP66Height = 76; // 8075c771ed8b495ffd943980a95f702ab34fce3c8c54e379548bda33cc8c0573
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
-        consensus.nPowTargetTimespan = 3.5 * 24 * 60 * 60; // 3.5 days
         consensus.nPowTargetSpacing = 2.5 * 60;
         consensus.fPowAllowMinDifficultyBlocks = true;
         consensus.fPowNoRetargeting = false;
@@ -278,7 +296,6 @@ public:
         consensus.BIP65Height = 1351; // BIP65 activated on regtest (Used in rpc activation tests)
         consensus.BIP66Height = 1251; // BIP66 activated on regtest (Used in rpc activation tests)
         consensus.powLimit = uint256S("7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
-        consensus.nPowTargetTimespan = 3.5 * 24 * 60 * 60; // two weeks
         consensus.nPowTargetSpacing = 2.5 * 60;
         consensus.fPowAllowMinDifficultyBlocks = true;
         consensus.fPowNoRetargeting = true;

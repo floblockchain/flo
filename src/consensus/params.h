@@ -59,10 +59,87 @@ struct Params {
     bool fPowAllowMinDifficultyBlocks;
     bool fPowNoRetargeting;
     int64_t nPowTargetSpacing;
-    int64_t nPowTargetTimespan;
-    int64_t DifficultyAdjustmentInterval() const { return nPowTargetTimespan / nPowTargetSpacing; }
     uint256 nMinimumChainWork;
     uint256 defaultAssumeValid;
+
+    // Florincoin: Difficulty adjustment forks.
+    int64_t TargetTimespan(int height) const {
+        // V1
+        if (height < nHeight_Difficulty_Version2)
+            return nTargetTimespan_Version1;
+        // V2
+        if (height < nHeight_Difficulty_Version3)
+            return nInterval_Version2 * nPowTargetSpacing;
+        // V3
+        return nInterval_Version3 * nPowTargetSpacing;
+    }
+
+    int64_t DifficultyAdjustmentInterval(int height) const {
+        // V1
+        if (height < nHeight_Difficulty_Version2)
+            return nInterval_Version1;
+        // V2
+        if (height < nHeight_Difficulty_Version3)
+            return nInterval_Version2;
+        // V3
+        return nInterval_Version3;
+    }
+
+    int64_t MaxActualTimespan(int height) const {
+        const int64_t averagingTargetTimespan = AveragingInterval(height) * nPowTargetSpacing;
+        // V1
+        if (height < nHeight_Difficulty_Version2)
+            return averagingTargetTimespan * (100 + nMaxAdjustDown_Version1) / 100;
+        // V2
+        if (height < nHeight_Difficulty_Version3)
+            return averagingTargetTimespan * (100 + nMaxAdjustDown_Version2) / 100;
+        // V3
+        return TargetTimespan(height) * (100 + nMaxAdjustDown_Version3) / 100;
+    }
+
+    int64_t MinActualTimespan(int height) const {
+        // V1
+        if (height < nHeight_Difficulty_Version2)
+            return TargetTimespan(height) * (100 - nMaxAdjustUp_Version1) / 100;
+        // V2
+        if (height < nHeight_Difficulty_Version3)
+            return TargetTimespan(height) * (100 - nMaxAdjustUp_Version2) / 100;
+        // V3
+        return TargetTimespan(height) * (100 - nMaxAdjustUp_Version3) / 100;
+    }
+
+    int64_t AveragingInterval(int height) const {
+        // V1
+        if (height < nHeight_Difficulty_Version2)
+            return nAveragingInterval_Version1;
+        // V2
+        if (height < nHeight_Difficulty_Version3)
+            return nAveragingInterval_Version2;
+        // V3
+        return nAveragingInterval_Version3;
+    }
+
+    // V1
+    int64_t nTargetTimespan_Version1;
+    int64_t nInterval_Version1;
+    int64_t nMaxAdjustUp_Version1;
+    int64_t nMaxAdjustDown_Version1;
+    int64_t nAveragingInterval_Version1;
+
+    // V2
+    int64_t nHeight_Difficulty_Version2;
+    int64_t nInterval_Version2;
+    int64_t nMaxAdjustDown_Version2;
+    int64_t nMaxAdjustUp_Version2;
+    int64_t nAveragingInterval_Version2;
+
+    // V3
+    int64_t nHeight_Difficulty_Version3;
+    int64_t nInterval_Version3;
+    int64_t nMaxAdjustDown_Version3;
+    int64_t nMaxAdjustUp_Version3;
+    int64_t nAveragingInterval_Version3;
+
 };
 } // namespace Consensus
 
