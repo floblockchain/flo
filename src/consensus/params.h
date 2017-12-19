@@ -94,18 +94,19 @@ struct Params {
         if (height < nHeight_Difficulty_Version3)
             return averagingTargetTimespan * (100 + nMaxAdjustDown_Version2) / 100;
         // V3
-        return TargetTimespan(height) * (100 + nMaxAdjustDown_Version3) / 100;
+        return averagingTargetTimespan * (100 + nMaxAdjustDown_Version3) / 100;
     }
 
     int64_t MinActualTimespan(int height) const {
+        const int64_t averagingTargetTimespan = AveragingInterval(height) * nPowTargetSpacing;
         // V1
         if (height < nHeight_Difficulty_Version2)
-            return TargetTimespan(height) * (100 - nMaxAdjustUp_Version1) / 100;
+            return averagingTargetTimespan * (100 - nMaxAdjustUp_Version1) / 100;
         // V2
         if (height < nHeight_Difficulty_Version3)
-            return TargetTimespan(height) * (100 - nMaxAdjustUp_Version2) / 100;
+            return averagingTargetTimespan * (100 - nMaxAdjustUp_Version2) / 100;
         // V3
-        return TargetTimespan(height) * (100 - nMaxAdjustUp_Version3) / 100;
+        return averagingTargetTimespan * (100 - nMaxAdjustUp_Version3) / 100;
     }
 
     int64_t AveragingInterval(int height) const {

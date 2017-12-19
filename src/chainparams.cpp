@@ -110,7 +110,7 @@ public:
         consensus.nPowTargetSpacing = 40; // 40s block time
         // V1
         consensus.nTargetTimespan_Version1 = 60 * 60;
-        consensus.nInterval_Version1 = 60 * 60 / 40;
+        consensus.nInterval_Version1 = consensus.nTargetTimespan_Version1 / consensus.nPowTargetSpacing;
         consensus.nMaxAdjustUp_Version1 = 75;
         consensus.nMaxAdjustDown_Version1 = 300;
         consensus.nAveragingInterval_Version1 = consensus.nInterval_Version1;
