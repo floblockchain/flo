@@ -117,8 +117,8 @@ public:
         // V2
         consensus.nHeight_Difficulty_Version2 = 208440;
         consensus.nInterval_Version2 = 15;
-        consensus.nMaxAdjustDown_Version2 = 75;
-        consensus.nMaxAdjustUp_Version2 = 300;
+        consensus.nMaxAdjustDown_Version2 = 300;
+        consensus.nMaxAdjustUp_Version2 = 75;
         consensus.nAveragingInterval_Version2 = consensus.nInterval_Version2;
         // V3
         consensus.nHeight_Difficulty_Version3 = 426000;
