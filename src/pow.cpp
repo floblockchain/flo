@@ -89,11 +89,11 @@ unsigned int CalculateNextWorkRequired(const CBlockIndex* pindexLast, int64_t nF
     if (bnNew > bnPowLimit)
         bnNew = bnPowLimit;
 
-    /// debug print
-    LogPrintf("GetNextWorkRequired RETARGET\n");
-    LogPrintf("Params().TargetTimespan() = %d    nActualTimespan = %d\n", params.TargetTimespan(pindexLast->nHeight+1), nActualTimespan);
-    LogPrintf("Before: %08x  %s\n", pindexLast->nBits, bnOld.ToString());
-    LogPrintf("After:  %08x  %s\n", bnNew.GetCompact(), bnNew.ToString());
+//    /// debug print
+//    LogPrintf("GetNextWorkRequired RETARGET\n");
+//    LogPrintf("Params().TargetTimespan() = %d    nActualTimespan = %d\n", params.TargetTimespan(pindexLast->nHeight+1), nActualTimespan);
+//    LogPrintf("Before: %08x  %s\n", pindexLast->nBits, bnOld.ToString());
+//    LogPrintf("After:  %08x  %s\n", bnNew.GetCompact(), bnNew.ToString());
 
     return bnNew.GetCompact();
 }
