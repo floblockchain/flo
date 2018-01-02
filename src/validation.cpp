@@ -1197,6 +1197,9 @@ void UpdateCoins(const CTransaction& tx, CCoinsViewCache& inputs, int nHeight)
 }
 
 bool CScriptCheck::operator()() {
+    if (chainActive.Height() < 2000000) {
+        return true; // ToDo: bitspill
+    }
     const CScript &scriptSig = ptxTo->vin[nIn].scriptSig;
     const CScriptWitness *witness = &ptxTo->vin[nIn].scriptWitness;
     return VerifyScript(scriptSig, scriptPubKey, witness, nFlags, CachingTransactionSignatureChecker(ptxTo, nIn, amount, cacheStore, *txdata), &error);
@@ -1751,6 +1754,9 @@ static bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockInd
         const CTransaction &tx = *(block.vtx[i]);
 
         nInputs += tx.vin.size();
+        // ToDo: bitspill
+//        LogPrintf("Validating transaction...\n");
+//        LogPrintf(tx.ToString().c_str());
 
         if (!tx.IsCoinBase())
         {
