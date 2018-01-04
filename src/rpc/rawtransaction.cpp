@@ -287,6 +287,7 @@ UniValue verifytxoutproof(const JSONRPCRequest& request)
     return res;
 }
 
+// ToDo: FLO 0.15
 UniValue createrawtransaction(const JSONRPCRequest& request)
 {
     if (request.fHelp || request.params.size() < 2 || request.params.size() > 4)
@@ -551,6 +552,7 @@ static void TxInErrorToJSON(const CTxIn& txin, UniValue& vErrorsRet, const std::
     vErrorsRet.push_back(entry);
 }
 
+// ToDo: FLO 0.15
 UniValue combinerawtransaction(const JSONRPCRequest& request)
 {
 
