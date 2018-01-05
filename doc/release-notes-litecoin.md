@@ -10,7 +10,7 @@ and performance improvements, as well as updated translations.
 
 Please report bugs using the issue tracker at GitHub:
 
-  <https://github.com/litecoin-project/litecoin/issues>
+  <https://github.com/floblockchain/flo/issues>
 
 To receive security and update notifications, please subscribe to:
 
@@ -95,7 +95,7 @@ Initial Block Download, startup, transaction and block validation much faster:
   validation. In version 0.15, SHA256 hardware optimization is disabled in release builds by
   default, but can be enabled by using `--enable-experimental-asm` when building.
 - Refill of the keypool no longer flushes the wallet between each key which resulted in a ~20x speedup in creating a new wallet. Part of this speedup was used to increase the default keypool to 1000 keys to make recovery more robust. (See [PR 10831](https://github.com/bitcoin/bitcoin/pull/10831)).
-- Scrypt hashing has been optimized for architectures supporting SSE 2 (See [PR 362](https://github.com/litecoin-project/litecoin/pull/362)). This boosts scrypt hashing performance by a factor of 2. In version 0.15, scrypt hardware optimization is disabled in release builds by default, but can be enabled by using `--enable-sse2` when building.
+- Scrypt hashing has been optimized for architectures supporting SSE 2 (See [PR 362](https://github.com/floblockchain/flo/pull/362)). This boosts scrypt hashing performance by a factor of 2. In version 0.15, scrypt hardware optimization is disabled in release builds by default, but can be enabled by using `--enable-sse2` when building.
 
 Fee Estimation Improvements
 ---------------------------
