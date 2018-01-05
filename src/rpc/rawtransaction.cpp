@@ -317,6 +317,7 @@ UniValue createrawtransaction(const JSONRPCRequest& request)
             "3. locktime                  (numeric, optional, default=0) Raw locktime. Non-0 value also locktime-activates inputs\n"
             "4. replaceable               (boolean, optional, default=false) Marks this transaction as BIP125 replaceable.\n"
             "                             Allows this transaction to be replaced by a transaction with higher fees. If provided, it is an error if explicit sequence numbers are incompatible.\n"
+            "5. tx-comment                (string, optional) Transaction tx-comment (default = \"\").\n"
             "\nResult:\n"
             "\"transaction\"              (string) hex string of the transaction\n"
 
@@ -345,7 +346,10 @@ UniValue createrawtransaction(const JSONRPCRequest& request)
 
     bool rbfOptIn = request.params.size() > 3 ? request.params[3].isTrue() : false;
 
-    rawTx.strTxComment = request.params.size() > 4 ? request.params[4].get_string() : "";
+    rawTx.strTxComment = "";
+    if (request.params.size() > 4 && !request.params[4].isNull()) {
+        rawTx.strTxComment = request.params[4].get_str();
+    }
 
     for (unsigned int idx = 0; idx < inputs.size(); idx++) {
         const UniValue& input = inputs[idx];
@@ -975,7 +979,7 @@ static const CRPCCommand commands[] =
 { //  category              name                      actor (function)         okSafeMode
   //  --------------------- ------------------------  -----------------------  ----------
     { "rawtransactions",    "getrawtransaction",      &getrawtransaction,      true,  {"txid","verbose"} },
-    { "rawtransactions",    "createrawtransaction",   &createrawtransaction,   true,  {"inputs","outputs","locktime","replaceable"} },
+    { "rawtransactions",    "createrawtransaction",   &createrawtransaction,   true,  {"inputs","outputs","locktime","replaceable","tx-comment"} },
     { "rawtransactions",    "decoderawtransaction",   &decoderawtransaction,   true,  {"hexstring"} },
     { "rawtransactions",    "decodescript",           &decodescript,           true,  {"hexstring"} },
     { "rawtransactions",    "sendrawtransaction",     &sendrawtransaction,     false, {"hexstring","allowhighfees"} },
