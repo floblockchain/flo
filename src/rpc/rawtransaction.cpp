@@ -287,12 +287,11 @@ UniValue verifytxoutproof(const JSONRPCRequest& request)
     return res;
 }
 
-// ToDo: FLO 0.15
 UniValue createrawtransaction(const JSONRPCRequest& request)
 {
-    if (request.fHelp || request.params.size() < 2 || request.params.size() > 4)
+    if (request.fHelp || request.params.size() < 2 || request.params.size() > 5)
         throw std::runtime_error(
-            "createrawtransaction [{\"txid\":\"id\",\"vout\":n},...] {\"address\":amount,\"data\":\"hex\",...} ( locktime ) ( replaceable )\n"
+            "createrawtransaction [{\"txid\":\"id\",\"vout\":n},...] {\"address\":amount,\"data\":\"hex\",...} ( locktime ) ( replaceable ) ( txcomment )\n"
             "\nCreate a transaction spending the given inputs and creating new outputs.\n"
             "Outputs can be addresses or data.\n"
             "Returns hex-encoded raw transaction.\n"
@@ -345,6 +344,8 @@ UniValue createrawtransaction(const JSONRPCRequest& request)
     }
 
     bool rbfOptIn = request.params.size() > 3 ? request.params[3].isTrue() : false;
+
+    rawTx.strTxComment = request.params.size() > 4 ? request.params[4].get_string() : "";
 
     for (unsigned int idx = 0; idx < inputs.size(); idx++) {
         const UniValue& input = inputs[idx];
@@ -581,9 +582,18 @@ UniValue combinerawtransaction(const JSONRPCRequest& request)
     UniValue txs = request.params[0].get_array();
     std::vector<CMutableTransaction> txVariants(txs.size());
 
+    bool commentExists = false;
+    std::string strTxComment = "";
     for (unsigned int idx = 0; idx < txs.size(); idx++) {
         if (!DecodeHexTx(txVariants[idx], txs[idx].get_str(), true)) {
             throw JSONRPCError(RPC_DESERIALIZATION_ERROR, strprintf("TX decode failed for tx %d", idx));
+        }
+        if (txVariants[idx].strTxComment != "") {
+            if (commentExists) {
+                throw JSONRPCError(RPC_VERIFY_ERROR, "Only one transaction comment is allowed");
+            }
+            commentExists = true;
+            strTxComment = txVariants[idx].strTxComment;
         }
     }
 
@@ -594,6 +604,7 @@ UniValue combinerawtransaction(const JSONRPCRequest& request)
     // mergedTx will end up with all the signatures; it
     // starts as a clone of the rawtx:
     CMutableTransaction mergedTx(txVariants[0]);
+    mergedTx.strTxComment = strTxComment;
 
     // Fetch previous transactions (inputs):
     CCoinsView viewDummy;
