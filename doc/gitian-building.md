@@ -1,9 +1,9 @@
 Gitian building
 ================
 
-*Setup instructions for a Gitian build of Litecoin Core using a Debian VM or physical system.*
+*Setup instructions for a Gitian build of FLO Core using a Debian VM or physical system.*
 
-Gitian is the deterministic build process that is used to build the Litecoin
+Gitian is the deterministic build process that is used to build the FLO
 Core executables. It provides a way to be reasonably sure that the
 executables are really built from the source on GitHub. It also makes sure that
 the same, tested dependencies are used and statically built into the executable.
@@ -11,7 +11,7 @@ the same, tested dependencies are used and statically built into the executable.
 Multiple developers build the source code by following a specific descriptor
 ("recipe"), cryptographically sign the result, and upload the resulting signature.
 These results are compared and only if they match, the build is accepted and uploaded
-to litecoin.org.
+to flo.org.
 
 More independent Gitian builders are needed, which is why this guide exists.
 It is preferred you follow these steps yourself instead of using someone else's
@@ -26,7 +26,7 @@ Table of Contents
 - [Installing Gitian](#installing-gitian)
 - [Setting up the Gitian image](#setting-up-the-gitian-image)
 - [Getting and building the inputs](#getting-and-building-the-inputs)
-- [Building Litecoin Core](#building-litecoin-core)
+- [Building FLO Core](#building-flo-core)
 - [Building an alternative repository](#building-an-alternative-repository)
 - [Signing externally](#signing-externally)
 - [Uploading signatures](#uploading-signatures)
@@ -310,7 +310,7 @@ cd ..
 
 **Note**: When sudo asks for a password, enter the password for the user *debian* not for *root*.
 
-Clone the git repositories for litecoin and Gitian.
+Clone the git repositories for flo and Gitian.
 
 ```bash
 git clone https://github.com/devrandom/gitian-builder.git
@@ -344,16 +344,16 @@ Getting and building the inputs
 At this point you have two options, you can either use the automated script (found in [contrib/gitian-build.sh](/contrib/gitian-build.sh)) or you could manually do everything by following this guide. If you're using the automated script, then run it with the "--setup" command. Afterwards, run it with the "--build" command (example: "contrib/gitian-build.sh -b signer 0.13.0"). Otherwise ignore this.
 
 Follow the instructions in [doc/release-process.md](release-process.md#fetch-and-create-inputs-first-time-or-when-dependency-versions-change)
-in the litecoin repository under 'Fetch and create inputs' to install sources which require
+in the flo repository under 'Fetch and create inputs' to install sources which require
 manual intervention. Also optionally follow the next step: 'Seed the Gitian sources cache
 and offline git repositories' which will fetch the remaining files required for building
 offline.
 
-Building Litecoin Core
+Building FLO Core
 ----------------
 
-To build Litecoin Core (for Linux, OS X and Windows) just follow the steps under 'perform
-Gitian builds' in [doc/release-process.md](release-process.md#perform-gitian-builds) in the litecoin repository.
+To build FLO Core (for Linux, OS X and Windows) just follow the steps under 'perform
+Gitian builds' in [doc/release-process.md](release-process.md#perform-gitian-builds) in the flo repository.
 
 This may take some time as it will build all the dependencies needed for each descriptor.
 These dependencies will be cached after a successful build to avoid rebuilding them when possible.
@@ -367,7 +367,7 @@ tail -f var/build.log
 
 Output from `gbuild` will look something like
 
-    Initialized empty Git repository in /home/debian/gitian-builder/inputs/litecoin/.git/
+    Initialized empty Git repository in /home/debian/gitian-builder/inputs/flo/.git/
     remote: Counting objects: 57959, done.
     remote: Total 57959 (delta 0), reused 0 (delta 0), pack-reused 57958
     Receiving objects: 100% (57959/57959), 53.76 MiB | 484.00 KiB/s, done.
@@ -398,18 +398,18 @@ and inputs.
 
 For example:
 ```bash
-URL=https://github.com/thrasher-/litecoin.git
+URL=https://github.com/thrasher-/flo.git
 COMMIT=2014_03_windows_unicode_path
-./bin/gbuild --commit litecoin=${COMMIT} --url litecoin=${URL} ../litecoin/contrib/gitian-descriptors/gitian-linux.yml
-./bin/gbuild --commit litecoin=${COMMIT} --url litecoin=${URL} ../litecoin/contrib/gitian-descriptors/gitian-win.yml
-./bin/gbuild --commit litecoin=${COMMIT} --url litecoin=${URL} ../litecoin/contrib/gitian-descriptors/gitian-osx.yml
+./bin/gbuild --commit flo=${COMMIT} --url flo=${URL} ../flo/contrib/gitian-descriptors/gitian-linux.yml
+./bin/gbuild --commit flo=${COMMIT} --url flo=${URL} ../flo/contrib/gitian-descriptors/gitian-win.yml
+./bin/gbuild --commit flo=${COMMIT} --url flo=${URL} ../flo/contrib/gitian-descriptors/gitian-osx.yml
 ```
 
 Building fully offline
 -----------------------
 
 For building fully offline including attaching signatures to unsigned builds, the detached-sigs repository
-and the litecoin git repository with the desired tag must both be available locally, and then gbuild must be
+and the flo git repository with the desired tag must both be available locally, and then gbuild must be
 told where to find them. It also requires an apt-cacher-ng which is fully-populated but set to offline mode, or
 manually disabling gitian-builder's use of apt-get to update the VM build environment.
 
@@ -428,7 +428,7 @@ cd /path/to/gitian-builder
 LXC_ARCH=amd64 LXC_SUITE=trusty on-target -u root apt-get update
 LXC_ARCH=amd64 LXC_SUITE=trusty on-target -u root \
   -e DEBIAN_FRONTEND=noninteractive apt-get --no-install-recommends -y install \
-  $( sed -ne '/^packages:/,/[^-] .*/ {/^- .*/{s/"//g;s/- //;p}}' ../litecoin/contrib/gitian-descriptors/*|sort|uniq )
+  $( sed -ne '/^packages:/,/[^-] .*/ {/^- .*/{s/"//g;s/- //;p}}' ../flo/contrib/gitian-descriptors/*|sort|uniq )
 LXC_ARCH=amd64 LXC_SUITE=trusty on-target -u root apt-get -q -y purge grub
 LXC_ARCH=amd64 LXC_SUITE=trusty on-target -u root -e DEBIAN_FRONTEND=noninteractive apt-get -y dist-upgrade
 ```
@@ -450,10 +450,10 @@ Then when building, override the remote URLs that gbuild would otherwise pull fr
 cd /some/root/path/
 git clone https://github.com/floblockchain/flo-detached-sigs.git
 
-BTCPATH=/some/root/path/litecoin
-SIGPATH=/some/root/path/litecoin-detached-sigs
+BTCPATH=/some/root/path/flo
+SIGPATH=/some/root/path/flo-detached-sigs
 
-./bin/gbuild --url litecoin=${BTCPATH},signature=${SIGPATH} ../litecoin/contrib/gitian-descriptors/gitian-win-signer.yml
+./bin/gbuild --url flo=${BTCPATH},signature=${SIGPATH} ../flo/contrib/gitian-descriptors/gitian-win-signer.yml
 ```
 
 Signing externally
@@ -468,9 +468,9 @@ When you execute `gsign` you will get an error from GPG, which can be ignored. C
 in `gitian.sigs` to your signing machine and do
 
 ```bash
-    gpg --detach-sign ${VERSION}-linux/${SIGNER}/litecoin-linux-build.assert
-    gpg --detach-sign ${VERSION}-win/${SIGNER}/litecoin-win-build.assert
-    gpg --detach-sign ${VERSION}-osx-unsigned/${SIGNER}/litecoin-osx-build.assert
+    gpg --detach-sign ${VERSION}-linux/${SIGNER}/flo-linux-build.assert
+    gpg --detach-sign ${VERSION}-win/${SIGNER}/flo-win-build.assert
+    gpg --detach-sign ${VERSION}-osx-unsigned/${SIGNER}/flo-osx-build.assert
 ```
 
 This will create the `.sig` files that can be committed together with the `.assert` files to assert your
@@ -480,5 +480,5 @@ Uploading signatures
 ---------------------
 
 After building and signing you can push your signatures (both the `.assert` and `.assert.sig` files) to the
-[litecoin-project/gitian.sigs.ltc](https://github.com/floblockchain/gitian.sigs.ltc/) repository, or if that's not possible create a pull
-request. You can also mail the files to thrasher (thrasher@addictionsofware.com) and he will commit them.
+[floblockchain/gitian.sigs](https://github.com/floblockchain/gitian.sigs.flo/) repository, or if that's not possible create a pull
+request

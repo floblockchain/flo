@@ -62,7 +62,7 @@ struct Params {
     uint256 nMinimumChainWork;
     uint256 defaultAssumeValid;
 
-    // Florincoin: Difficulty adjustment forks.
+    // FLO: Difficulty adjustment forks.
     int64_t TargetTimespan(int height) const {
         // V1
         if (height < nHeight_Difficulty_Version2)

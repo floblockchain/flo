@@ -24,17 +24,17 @@ If you want to build the disk image with `make deploy` (.dmg / optional), you ne
 
 NOTE: Building with Qt4 is still supported, however, could result in a broken UI. Building with Qt5 is recommended.
 
-Build Litecoin Core
+Build FLO Core
 ------------------------
 
-1. Clone the litecoin source code and cd into `litecoin`
+1. Clone the flo source code and cd into `flo`
 
         git clone https://github.com/floblockchain/flo
-        cd litecoin
+        cd flo
 
-2.  Build litecoin-core:
+2.  Build flo-core:
 
-    Configure and build the headless litecoin binaries as well as the GUI (if Qt is found).
+    Configure and build the headless flo binaries as well as the GUI (if Qt is found).
 
     You can disable the GUI build by passing `--without-gui` to configure.
 
@@ -53,37 +53,37 @@ Build Litecoin Core
 Running
 -------
 
-Litecoin Core is now available at `./src/litecoind`
+FLO Core is now available at `./src/flod`
 
 Before running, it's recommended you create an RPC configuration file.
 
-    echo -e "rpcuser=litecoinrpc\nrpcpassword=$(xxd -l 16 -p /dev/urandom)" > "/Users/${USER}/Library/Application Support/Litecoin/litecoin.conf"
+    echo -e "rpcuser=florpc\nrpcpassword=$(xxd -l 16 -p /dev/urandom)" > "/Users/${USER}/Library/Application Support/FLO/flo.conf"
 
-    chmod 600 "/Users/${USER}/Library/Application Support/Litecoin/litecoin.conf"
+    chmod 600 "/Users/${USER}/Library/Application Support/FLO/flo.conf"
 
-The first time you run litecoind, it will start downloading the blockchain. This process could take several hours.
+The first time you run flod, it will start downloading the blockchain. This process could take several hours.
 
 You can monitor the download process by looking at the debug.log file:
 
-    tail -f $HOME/Library/Application\ Support/Litecoin/debug.log
+    tail -f $HOME/Library/Application\ Support/FLO/debug.log
 
 Other commands:
 -------
 
-    ./src/litecoind -daemon # Starts the litecoin daemon.
-    ./src/litecoin-cli --help # Outputs a list of command-line options.
-    ./src/litecoin-cli help # Outputs a list of RPC commands when the daemon is running.
+    ./src/flod -daemon # Starts the flo daemon.
+    ./src/flo-cli --help # Outputs a list of command-line options.
+    ./src/flo-cli help # Outputs a list of RPC commands when the daemon is running.
 
 Using Qt Creator as IDE
 ------------------------
-You can use Qt Creator as an IDE, for litecoin development.
+You can use Qt Creator as an IDE, for flo development.
 Download and install the community edition of [Qt Creator](https://www.qt.io/download/).
 Uncheck everything except Qt Creator during the installation process.
 
 1. Make sure you installed everything through Homebrew mentioned above
 2. Do a proper ./configure --enable-debug
 3. In Qt Creator do "New Project" -> Import Project -> Import Existing Project
-4. Enter "litecoin-qt" as project name, enter src/qt as location
+4. Enter "flo-qt" as project name, enter src/qt as location
 5. Leave the file selection as it is
 6. Confirm the "summary page"
 7. In the "Projects" tab select "Manage Kits..."
