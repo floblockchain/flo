@@ -1,13 +1,13 @@
 *.tar.gz
 
 *.exe
-src/litecoin
-src/litecoind
-src/litecoin-cli
-src/litecoin-tx
-src/test/test_litecoin
-src/test/test_litecoin_fuzzy
-src/qt/test/test_litecoin-qt
+src/flo
+src/flod
+src/flo-cli
+src/flo-tx
+src/test/test_flo
+src/test/test_flo_fuzzy
+src/qt/test/test_flo-qt
 
 # autoreconf
 Makefile.in
@@ -74,12 +74,12 @@ src/qt/test/moc*.cpp
 # Compilation and Qt preprocessor part
 *.qm
 Makefile
-litecoin-qt
-Litecoin-Qt.app
+flo-qt
+FLO-Qt.app
 
 # Unit-tests
 Makefile.test
-litecoin-qt_test
+flo-qt_test
 
 # Resources cpp
 qrc_*.cpp
@@ -92,7 +92,7 @@ build
 *.gcno
 *.gcda
 /*.info
-test_litecoin.coverage/
+test_flo.coverage/
 total.coverage/
 coverage_percent.txt
 
