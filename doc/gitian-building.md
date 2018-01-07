@@ -315,7 +315,7 @@ Clone the git repositories for flo and Gitian.
 ```bash
 git clone https://github.com/devrandom/gitian-builder.git
 git clone https://github.com/floblockchain/flo
-git clone https://github.com/floblockchain/gitian.sigs.ltc.git
+git clone https://github.com/floblockchain/gitian.sigs.flo.git
 ```
 
 Setting up the Gitian image
