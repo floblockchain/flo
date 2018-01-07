@@ -188,13 +188,13 @@ public:
                 {2094558, uint256S("0x946616c88286f32bfac15868456d87a86f8611e1f9b56594b81e46831ce43f81")},
             }
         };
-        //TODO: fix this below
+
         chainTxData = ChainTxData{
-            // Data as of block 5d64c04d52b041508c0e95f5b2de6203a2d6e2fd879d0b4e0c1cddab2213a658 (not: db42d00d824950a125f9b08b6b6c282c484781562fa8b3bd29d6ce4a2627c348) (height 1259851).
-        	1436254405, //not 1514751180, // * UNIX timestamp of last known number of transactions
-            3210200,    // * total number of transactions between genesis and that timestamp
+            // Data as of block cacd5149aaed1088ae1db997a741210b0525e941356104120f182f3159931c79 (height 2532181).
+        	1515282818, // * UNIX timestamp of last known number of transactions
+        	3223208,    // * total number of transactions between genesis and that timestamp
                         //   (the tx=... number in the SetBestChain debug.log lines)
-            0.05        // * estimated number of transactions per second after that timestamp
+        	0.04282469282115031  // * estimated number of transactions per second after that timestamp
         };
     }
 };
