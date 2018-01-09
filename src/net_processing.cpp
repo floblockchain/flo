@@ -1266,6 +1266,7 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
                 // These bits have been used as a flag to indicate that a node is running incompatible
                 // consensus rules instead of changing the network magic, so we're stuck disconnecting
                 // based on these service bits, at least for a while.
+            	LogPrintf("Immediately disconnect peers that use service bits 6 or 8 until August 1st, 2018: %s\n", pfrom->addr.ToString());
                 pfrom->fDisconnect = true;
                 return false;
             }
@@ -1367,6 +1368,7 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
                 connman.PushMessage(pfrom, CNetMsgMaker(nSendVersion).Make(NetMsgType::GETADDR));
                 pfrom->fGetAddr = true;
             }
+            LogPrintf("MarkAddressGood: %s\n", pfrom->addr.ToString());
             connman.MarkAddressGood(pfrom->addr);
         }
 
@@ -1471,11 +1473,13 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
         int64_t nSince = nNow - 10 * 60;
         for (CAddress& addr : vAddr)
         {
-            if (interruptMsgProc)
+        	if (interruptMsgProc)
                 return true;
 
             if ((addr.nServices & REQUIRED_SERVICES) != REQUIRED_SERVICES)
-                continue;
+            {
+            	continue;
+            }
 
             if (addr.nTime <= 100000000 || addr.nTime > nNow + 10 * 60)
                 addr.nTime = nNow - 5 * 24 * 60 * 60;
@@ -1488,7 +1492,9 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
             }
             // Do not store addresses outside our network
             if (fReachable)
+            {
                 vAddrOk.push_back(addr);
+            }
         }
         connman.AddNewAddresses(vAddrOk, pfrom->addr, 2 * 60 * 60);
         if (vAddr.size() < 1000)

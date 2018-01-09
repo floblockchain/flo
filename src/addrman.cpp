@@ -197,13 +197,19 @@ void CAddrMan::Good_(const CService& addr, int64_t nTime)
 
     // if not found, bail out
     if (!pinfo)
+    {
+    	LogPrint(BCLog::ADDRMAN, "if not found, bail out: %s\n", addr.ToString());
         return;
+    }
 
     CAddrInfo& info = *pinfo;
 
     // check whether we are talking about the exact same CService (including same port)
     if (info != addr)
+    {
+    	LogPrint(BCLog::ADDRMAN, "exact same CService (including same port): %s\n", addr.ToString());
         return;
+    }
 
     // update info
     info.nLastSuccess = nTime;
@@ -214,7 +220,10 @@ void CAddrMan::Good_(const CService& addr, int64_t nTime)
 
     // if it is already in the tried set, don't do anything else
     if (info.fInTried)
+    {
+    	LogPrint(BCLog::ADDRMAN, "Already in tried set: %s\n", addr.ToString());
         return;
+    }
 
     // find a bucket it is in now
     int nRnd = RandomInt(ADDRMAN_NEW_BUCKET_COUNT);
@@ -231,7 +240,10 @@ void CAddrMan::Good_(const CService& addr, int64_t nTime)
     // if no bucket is found, something bad happened;
     // TODO: maybe re-add the node, but for now, just bail out
     if (nUBucket == -1)
+    {
+    	LogPrint(BCLog::ADDRMAN, "No bucket found: %s\n", addr.ToString());
         return;
+    }
 
     LogPrint(BCLog::ADDRMAN, "Moving %s to tried\n", addr.ToString());
 
