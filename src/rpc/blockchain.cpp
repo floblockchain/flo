@@ -57,7 +57,6 @@ double GetDifficulty(const CBlockIndex* blockindex)
     }
 
     int nShift = (blockindex->nBits >> 24) & 0xff;
-
     double dDiff =
         (double)0x0000ffff / (double)(blockindex->nBits & 0x00ffffff);
 
@@ -1526,6 +1525,7 @@ UniValue getchaintxstats(const JSONRPCRequest& request)
     UniValue ret(UniValue::VOBJ);
     ret.push_back(Pair("time", (int64_t)pindex->nTime));
     ret.push_back(Pair("txcount", (int64_t)pindex->nChainTx));
+
     ret.push_back(Pair("txrate", ((double)nTxDiff) / nTimeDiff));
 
     return ret;

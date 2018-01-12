@@ -10,6 +10,7 @@
 #include "script/standard.h"
 #include "random.h"
 #include "streams.h"
+#include "util.h"
 
 #include <math.h>
 #include <stdlib.h>
@@ -229,6 +230,8 @@ CRollingBloomFilter::CRollingBloomFilter(const unsigned int nElements, const dou
      * =>          nFilterBits = -nHashFuncs * nMaxElements / log(1.0 - pow(fpRate, 1.0 / nHashFuncs))
      * =>          nFilterBits = -nHashFuncs * nMaxElements / log(1.0 - exp(logFpRate / nHashFuncs))
      */
+
+
     uint32_t nFilterBits = (uint32_t)ceil(-1.0 * nHashFuncs * nMaxElements / log(1.0 - exp(logFpRate / nHashFuncs)));
     data.clear();
     /* For each data element we need to store 2 bits. If both bits are 0, the

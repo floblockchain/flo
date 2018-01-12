@@ -253,14 +253,41 @@ public:
         // Deployment of SegWit (BIP141, BIP143, and BIP147)
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].bit = 1;
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nStartTime = 1483228800; // January 1, 2017
-        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1530446401; // July 1, 2018  FLO future date
+        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 0; //must be 0 to not use segwit // 1530446401; // July 1, 2018  FLO future date
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0x000000000000000000000000000000000000000000000000000000083540886d");
+//        consensus.nMinimumChainWork = uint256S("0x000000000000000000000000000000000000000000000000000000083540886d");
+        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000000000800000000");
 
         // By default assume that the signatures in ancestors of this block are valid.
         consensus.defaultAssumeValid = uint256S("0x4be79531ee8b0f410f0d8c8d785083acb4e14e5d54b0820502bc60f98a629b19"); //flo testnet block 20,000
 
+        // Difficulty adjustments
+        consensus.nPowTargetSpacing = 40; // 40s block time
+        // V1
+        consensus.nTargetTimespan_Version1 = 60 * 60;
+        consensus.nInterval_Version1 = consensus.nTargetTimespan_Version1 / consensus.nPowTargetSpacing;
+        consensus.nMaxAdjustUp_Version1 = 75;
+        consensus.nMaxAdjustDown_Version1 = 300;
+        consensus.nAveragingInterval_Version1 = consensus.nInterval_Version1;
+        // V2
+        consensus.nHeight_Difficulty_Version2 = 208440;
+        consensus.nInterval_Version2 = 15;
+        consensus.nMaxAdjustDown_Version2 = 300;
+        consensus.nMaxAdjustUp_Version2 = 75;
+        consensus.nAveragingInterval_Version2 = consensus.nInterval_Version2;
+        // V3
+        consensus.nHeight_Difficulty_Version3 = 426000;
+        consensus.nInterval_Version3 = 1;
+        consensus.nMaxAdjustDown_Version3 = 3;
+        consensus.nMaxAdjustUp_Version3 = 2;
+        consensus.nAveragingInterval_Version3 = 6;
+
+        /**
+         * The message start string is designed to be unlikely to occur in normal data.
+         * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
+         * a large 32-bit integer with any alignment.
+         */
         pchMessageStart[0] = 0xfd;
         pchMessageStart[1] = 0xc0;
         pchMessageStart[2] = 0x5a;
@@ -275,8 +302,9 @@ public:
 
         vFixedSeeds.clear();
         vSeeds.clear();
+
         // nodes with support for servicebits filtering should be at the top
-        vSeeds.emplace_back("testnet.florincoin.info", false);
+//        vSeeds.emplace_back("69.172.229.163:17312", false);
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,115);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,198);
@@ -296,12 +324,12 @@ public:
                 {2056, uint256S("0xd3334db071731beaa651f10624c2fea1a5e8c6f9e50f0e602f86262938374148")},
             }
         };
-        //TODO: fix this below
+
         chainTxData = ChainTxData{
-            // todo: flo; (litecoin: Data as of block 3351b6229da00b47ad7a8d7e1323b0e2874744b5296e3d6448293463ab758624 (height 153489)
-            1502953751,
-            382986,
-            0.01
+            // flo: Data as of block 4be79531ee8b0f410f0d8c8d785083acb4e14e5d54b0820502bc60f98a629b19 (height 20000)
+            1515699893, 			// * UNIX timestamp of last known number of transactions
+            34572,					// * total number of transactions between genesis and that timestamp
+            0.001454897737891917	// * estimated number of transactions per second after that timestamp
         };
 
     }
@@ -341,7 +369,32 @@ public:
         // By default assume that the signatures in ancestors of this block are valid.
         consensus.defaultAssumeValid = uint256S("0x00");
 
-        pchMessageStart[0] = 0xfa;
+        // Difficulty adjustments
+        consensus.nPowTargetSpacing = 40; // 40s block time
+        // V1
+        consensus.nTargetTimespan_Version1 = 60 * 60;
+        consensus.nInterval_Version1 = consensus.nTargetTimespan_Version1 / consensus.nPowTargetSpacing;
+        consensus.nMaxAdjustUp_Version1 = 75;
+        consensus.nMaxAdjustDown_Version1 = 300;
+        consensus.nAveragingInterval_Version1 = consensus.nInterval_Version1;
+        // V2
+        consensus.nHeight_Difficulty_Version2 = 208440;
+        consensus.nInterval_Version2 = 15;
+        consensus.nMaxAdjustDown_Version2 = 300;
+        consensus.nMaxAdjustUp_Version2 = 75;
+        consensus.nAveragingInterval_Version2 = consensus.nInterval_Version2;
+        // V3
+        consensus.nHeight_Difficulty_Version3 = 426000;
+        consensus.nInterval_Version3 = 1;
+        consensus.nMaxAdjustDown_Version3 = 3;
+        consensus.nMaxAdjustUp_Version3 = 2;
+        consensus.nAveragingInterval_Version3 = 6;
+
+        /**
+         * The message start string is designed to be unlikely to occur in normal data.
+         * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
+         * a large 32-bit integer with any alignment.
+         */pchMessageStart[0] = 0xfa;
         pchMessageStart[1] = 0xbf;
         pchMessageStart[2] = 0xb5;
         pchMessageStart[3] = 0xda;
