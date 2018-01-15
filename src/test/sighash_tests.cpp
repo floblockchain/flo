@@ -21,6 +21,9 @@
 
 #include <univalue.h>
 
+//uncomment this line to
+//#define PRINT_SIGHASH_JSON
+
 extern UniValue read_json(const std::string& jsondata);
 
 // Old script.cpp SignatureHash function

@@ -1197,9 +1197,9 @@ void UpdateCoins(const CTransaction& tx, CCoinsViewCache& inputs, int nHeight)
 }
 
 bool CScriptCheck::operator()() {
-    if (chainActive.Height() < 2000000) {
-        return true; // ToDo: bitspill
-    }
+//    if (chainActive.Height() < 2000000) {
+//        return true; // ToDo: bitspill
+//    }
     const CScript &scriptSig = ptxTo->vin[nIn].scriptSig;
     const CScriptWitness *witness = &ptxTo->vin[nIn].scriptWitness;
     return VerifyScript(scriptSig, scriptPubKey, witness, nFlags, CachingTransactionSignatureChecker(ptxTo, nIn, amount, cacheStore, *txdata), &error);

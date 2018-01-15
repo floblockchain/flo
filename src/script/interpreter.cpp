@@ -1137,6 +1137,9 @@ public:
              SerializeOutput(s, nOutput);
         // Serialize nLockTime
         ::Serialize(s, txTo.nLockTime);
+        // Serialize strTxComment
+        if (txTo.nVersion >= 2)
+        	 ::Serialize(s, txTo.strTxComment);
     }
 };
 
@@ -1214,8 +1217,12 @@ uint256 SignatureHash(const CScript& scriptCode, const CTransaction& txTo, unsig
         ss << hashOutputs;
         // Locktime
         ss << txTo.nLockTime;
+        // TX Comment
+        if (txTo.nVersion >= 2)
+            ss << txTo.strTxComment;
         // Sighash type
         ss << nHashType;
+
 
         return ss.GetHash();
     }
