@@ -14,6 +14,12 @@
 #include <string>
 #include <vector>
 
+//create new data define CREATE_NEW_TEST_DATA
+//#define CREATE_NEW_TEST_DATA
+#ifdef CREATE_NEW_TEST_DATA
+#include <iostream>
+#endif
+
 struct TestDerivation {
     std::string pub;
     std::string prv;
@@ -38,61 +44,73 @@ struct TestVector {
 
 TestVector test1 =
   TestVector("000102030405060708090a0b0c0d0e0f")
-    ("xpub661MyMwAqRbcFtXgS5sYJABqqG9YLmC4Q1Rdap9gSE8NqtwybGhePY2gZ29ESFjqJoCu1Rupje8YtGqsefD265TMg7usUDFdp6W1EGMcet8",
-     "xprv9s21ZrQH143K3QTDL4LXw2F7HEK3wJUD2nW2nRk4stbPy6cq3jPPqjiChkVvvNKmPGJxWUtg6LnF5kejMRNNU3TGtRBeJgk33yuGBxrMPHi",
-     0x80000000)
-    ("xpub68Gmy5EdvgibQVfPdqkBBCHxA5htiqg55crXYuXoQRKfDBFA1WEjWgP6LHhwBZeNK1VTsfTFUHCdrfp1bgwQ9xv5ski8PX9rL2dZXvgGDnw",
-     "xprv9uHRZZhk6KAJC1avXpDAp4MDc3sQKNxDiPvvkX8Br5ngLNv1TxvUxt4cV1rGL5hj6KCesnDYUhd7oWgT11eZG7XnxHrnYeSvkzY7d2bhkJ7",
-     1)
-    ("xpub6ASuArnXKPbfEwhqN6e3mwBcDTgzisQN1wXN9BJcM47sSikHjJf3UFHKkNAWbWMiGj7Wf5uMash7SyYq527Hqck2AxYysAA7xmALppuCkwQ",
-     "xprv9wTYmMFdV23N2TdNG573QoEsfRrWKQgWeibmLntzniatZvR9BmLnvSxqu53Kw1UmYPxLgboyZQaXwTCg8MSY3H2EU4pWcQDnRnrVA1xe8fs",
-     0x80000002)
-    ("xpub6D4BDPcP2GT577Vvch3R8wDkScZWzQzMMUm3PWbmWvVJrZwQY4VUNgqFJPMM3No2dFDFGTsxxpG5uJh7n7epu4trkrX7x7DogT5Uv6fcLW5",
-     "xprv9z4pot5VBttmtdRTWfWQmoH1taj2axGVzFqSb8C9xaxKymcFzXBDptWmT7FwuEzG3ryjH4ktypQSAewRiNMjANTtpgP4mLTj34bhnZX7UiM",
-     2)
-    ("xpub6FHa3pjLCk84BayeJxFW2SP4XRrFd1JYnxeLeU8EqN3vDfZmbqBqaGJAyiLjTAwm6ZLRQUMv1ZACTj37sR62cfN7fe5JnJ7dh8zL4fiyLHV",
-     "xprvA2JDeKCSNNZky6uBCviVfJSKyQ1mDYahRjijr5idH2WwLsEd4Hsb2Tyh8RfQMuPh7f7RtyzTtdrbdqqsunu5Mm3wDvUAKRHSC34sJ7in334",
-     1000000000)
-    ("xpub6H1LXWLaKsWFhvm6RVpEL9P4KfRZSW7abD2ttkWP3SSQvnyA8FSVqNTEcYFgJS2UaFcxupHiYkro49S8yGasTvXEYBVPamhGW6cFJodrTHy",
-     "xprvA41z7zogVVwxVSgdKUHDy1SKmdb533PjDz7J6N6mV6uS3ze1ai8FHa8kmHScGpWmj4WggLyQjgPie1rFSruoUihUZREPSL39UNdE3BBDu76",
-     0);
+	("Fpub15bEDvvx1UUJ5idB31kXnq1boZreVC1g4Ujmym73jtvhcUVEK9SvXeNQ2RmL2AW122PytQNzGGrFrrecSjjkUneQd9sVX3cqNDmZaxyS1uX",
+	 "Fprv4rbspRQ4B6uzsEYhvzDXRh4sFY2A5jHphFpBBNhSBZPijgA5mc8fyr3vBA82WH5w6VW3PTMqcyVx4LTU9Vu6rkeKqT9GMX7Ec7ApYdFxs4e",
+	  0x80000000)
+	("Fpub17reDeER6jbHEKktEmdAfs7i8PQzsGVgk6AfwrVAi67yyknQjNz1enioohL2mUQY2EgYkdvQzuvLqFckPmU8Yg78pnfkSMX3t9u7taBzcAK",
+	 "Fprv4tsHp8hXGN2z1qgR8k6AJjAyaMaWTomqNsF59U5Z9kb16xTGBqfm6zQKxRUMuzTtoYPjkkgi1LLpn6VBo6BHepiquKpQbUp8K7ofyq9vodP",
+	  0x1)
+	("Fpub1A2mRRnJVSUM4moKy2X3Gc1NBmQ6sJDygQqWY8FyeivCDJHYTBQKcMd3DmncBR7syxJbY4NX7WQpRZMZs6e2EKw57zWbuzXKWtRuBVeADEd",
+	 "Fprv4w3R1vFQf4v3rHirrzz2uU4ddjZcTqW8KBuujjrN6PPDLVxPue654ZJZNUfRWvEwFd9RZaH963JEv31QvRyGRzDHR6n8fEayyv83Wij9dyj",
+	  0x80000002)
+	("Fpub1Ce3TxcACKKkvwbRDcvQdc3WQvGd8qoy1x5BnTZ8pbHdd9UfFwEkWoAxmnySdHZCLUQL9SM8VSynstVraCBZHn5uhtUjzwb1EaM3Gmtr4ZK",
+	 "Fprv4yeh4T5GMwmTiTWx7bPQGU6mrtS8jP67ej9az59XGFkekM9WiPvVxzrUvWt3V9kRm6ApA3E4WT899EkAWStTZ5ewmiLgpApvbBsG9HQsNDn",
+	  0x2)
+	("Fpub1EsSJPj7Nnzk1R58ut8VX7CpVjZMmS8ATRxV3R5c92rEzF72Khw7iNdtT7xq35hvonXWHSq5YBsuSJqrfVcm1NZAcg2vq8UqFGFtRS93Feo",
+	 "Fprv51t5ttCDYRSSnvzforbV9yG5whisMyQK6D2tF2fzahKG7SmsnAcsAaKQbqHVwp9rptJWmxTdRGaJcRechsRokUEzAxRnNFedkALReoCWMvd",
+	  0x3b9aca00)
+	("Fpub1GbCn5LMVvNwXkrb2RhDppCpHy8favwCFgM3HhTkM7EjhNWQr8BmyUnx5wsmtLneHUp3nnkt5PaW2jEsmM7brdiHVDT1dc4U4DsofWnZFzi",
+	 "Fprv53brNZoTfYpeKGn7vQADTgG5jwJBBUDLtTRSVK48nmhkpaBGJasXRgUUEh4hrjGwSHhmZKSaGK7RcbezEwSXsRtXWTC1VAQM2VtnPzNwcEC",
+	  0x0);
 
 TestVector test2 =
   TestVector("fffcf9f6f3f0edeae7e4e1dedbd8d5d2cfccc9c6c3c0bdbab7b4b1aeaba8a5a29f9c999693908d8a8784817e7b7875726f6c696663605d5a5754514e4b484542")
-    ("xpub661MyMwAqRbcFW31YEwpkMuc5THy2PSt5bDMsktWQcFF8syAmRUapSCGu8ED9W6oDMSgv6Zz8idoc4a6mr8BDzTJY47LJhkJ8UB7WEGuduB",
-     "xprv9s21ZrQH143K31xYSDQpPDxsXRTUcvj2iNHm5NUtrGiGG5e2DtALGdso3pGz6ssrdK4PFmM8NSpSBHNqPqm55Qn3LqFtT2emdEXVYsCzC2U",
-     0)
-    ("xpub69H7F5d8KSRgmmdJg2KhpAK8SR3DjMwAdkxj3ZuxV27CprR9LgpeyGmXUbC6wb7ERfvrnKZjXoUmmDznezpbZb7ap6r1D3tgFxHmwMkQTPH",
-     "xprv9vHkqa6EV4sPZHYqZznhT2NPtPCjKuDKGY38FBWLvgaDx45zo9WQRUT3dKYnjwih2yJD9mkrocEZXo1ex8G81dwSM1fwqWpWkeS3v86pgKt",
-     0xFFFFFFFF)
-    ("xpub6ASAVgeehLbnwdqV6UKMHVzgqAG8Gr6riv3Fxxpj8ksbH9ebxaEyBLZ85ySDhKiLDBrQSARLq1uNRts8RuJiHjaDMBU4Zn9h8LZNnBC5y4a",
-     "xprv9wSp6B7kry3Vj9m1zSnLvN3xH8RdsPP1Mh7fAaR7aRLcQMKTR2vidYEeEg2mUCTAwCd6vnxVrcjfy2kRgVsFawNzmjuHc2YmYRmagcEPdU9",
-     1)
-    ("xpub6DF8uhdarytz3FWdA8TvFSvvAh8dP3283MY7p2V4SeE2wyWmG5mg5EwVvmdMVCQcoNJxGoWaU9DCWh89LojfZ537wTfunKau47EL2dhHKon",
-     "xprv9zFnWC6h2cLgpmSA46vutJzBcfJ8yaJGg8cX1e5StJh45BBciYTRXSd25UEPVuesF9yog62tGAQtHjXajPPdbRCHuWS6T8XA2ECKADdw4Ef",
-     0xFFFFFFFE)
-    ("xpub6ERApfZwUNrhLCkDtcHTcxd75RbzS1ed54G1LkBUHQVHQKqhMkhgbmJbZRkrgZw4koxb5JaHWkY4ALHY2grBGRjaDMzQLcgJvLJuZZvRcEL",
-     "xprvA1RpRA33e1JQ7ifknakTFpgNXPmW2YvmhqLQYMmrj4xJXXWYpDPS3xz7iAxn8L39njGVyuoseXzU6rcxFLJ8HFsTjSyQbLYnMpCqE2VbFWc",
-     2)
-    ("xpub6FnCn6nSzZAw5Tw7cgR9bi15UV96gLZhjDstkXXxvCLsUXBGXPdSnLFbdpq8p9HmGsApME5hQTZ3emM2rnY5agb9rXpVGyy3bdW6EEgAtqt",
-     "xprvA2nrNbFZABcdryreWet9Ea4LvTJcGsqrMzxHx98MMrotbir7yrKCEXw7nadnHM8Dq38EGfSh6dqA9QWTyefMLEcBYJUuekgW4BYPJcr9E7j",
-     0);
+	("Fpub15bEDvvx1UUJ5L8W9AppF2jN3m15ApGVk4XWGhqsiH3ZuTWRVJDrxYXzNXrJjQrxvadmo539fMMWaeNqZveucheMV64xMY7VgbSfrrxY1rp",
+	 "Fprv4rbspRQ4B6uzrr4339HostndVjAamMYeNqbuUKSG9wWb2fBGwkucQkDWXDu5gne2LYFU8jpHu5Y99sBaBvHoU7y6HsDWVs1yBMo3uaPVLDN",
+	  0x0)
+	("Fpub18ryVecuVVJNbbioGxChJq8tQikKsnknJEGsSWsKnguXbRxQ4ZZw7P7EwzpCXVsQ8u7wfJ2u4SCUjooXT5MKxJJdm8odFtFsp5ZLJ9iPye3",
+	 "Fprv4usd6961f7k5P7eLAvfgwhC9rguqUL2vw1MGe8TiEMNYiddFX2FgZanm6jAtKrUrkCVJ2kE2LExGWNpPkCnrQM8VJ3dZtMBiJmhcGuGzwd5",
+	  0xffffffff)
+	("Fpub1A22kFeRsPUUmTvyhQCLnApSoTyERGvUPPMQMun6SRfv3jBrgSzFKStqZP4KHEUVvR3VK8tWMed5QUfsDyqSgSmGJDRgccWtgTpw8s7ntYn",
+	 "Fprv4w2gLk7Y31vBYyrWbNfLR2siFS8k1pCd2ARoZXNUt68wAvri8ufzmeaMi5es47DLeRpBomRfPFTNwcZAUaPyyea3imrueruy6Z393MVb1ru",
+	  0x1)
+	("Fpub1Cq1AGdN32mfs5c7m4Luk7kg8zqjXTqjhprGCySRkK2MiZ41yxWxDMHDQBFT57AnWbW39myjzmvuVGvt8tGPwnEAtVdXq9x6cEVtPMzJofX",
+	 "Fprv4yqekm6UCfDNebXef2ouNyoway1F817tLbvfQb2pByVNqkisSRChfYxjYsrV5pR2xPAtZ4W3no8bGKLKXTvMz8PLrYPiVxtMaMTsWvTygH4",
+	  0xfffffffe)
+	("Fpub1E135EZieRjPA2qiVYAT7dSs3jK6aSUEjXa9jh8qb5HcAuNx5dSxjseK2qNxGUhEU39fxH3T3PFm8v6GpmNuf8vdAPx2PT3WUTaTvLFF4h1",
+	 "Fprv511gfj2pp4B5wYmFPWdSkVW8VhUcAykPNJeYwJjE2jkdJ73oY68iC5KqBaasiEoKVxTartH3BAiB5SRh3Qprfy4WgUw2eAuyuwUPanePVaK",
+	  0x2)
+	("Fpub1FN52fnEAc3cuJ2cDcJ96NpqSnrCpmPKPhC39UVLDs9CF6iXFGNivSbK7ETEQ43vz6MuECYrw6GkdM9mes4oyPnCoZn7KpLF9kmeauXfZTw",
+	 "Fprv52NidAFLLEVKgox97am8jEt6tm1iRJfU2UGSM65ifXcDNJPNhj4UNeGqFzFssFtPYGKK9durdGYs7zKCmjC5iwoEVLSXhb3hcJowfLFVLYp",
+	  0x0);
 
 TestVector test3 =
   TestVector("4b381541583be4423346c643850da4b320e46a87ae3d2a4e6da11eba819cd4acba45d239319ac14f863b8d5ab5a0d0c64d2e8a1e7d1457df2e5a3c51c73235be")
-    ("xpub661MyMwAqRbcEZVB4dScxMAdx6d4nFc9nvyvH3v4gJL378CSRZiYmhRoP7mBy6gSPSCYk6SzXPTf3ND1cZAceL7SfJ1Z3GC8vBgp2epUt13",
-     "xprv9s21ZrQH143K25QhxbucbDDuQ4naNntJRi4KUfWT7xo4EKsHt2QJDu7KXp1A3u7Bi1j8ph3EGsZ9Xvz9dGuVrtHHs7pXeTzjuxBrCmmhgC6",
-      0x80000000)
-    ("xpub68NZiKmJWnxxS6aaHmn81bvJeTESw724CRDs6HbuccFQN9Ku14VQrADWgqbhhTHBaohPX4CjNLf9fq9MYo6oDaPPLPxSb7gwQN3ih19Zm4Y",
-     "xprv9uPDJpEQgRQfDcW7BkF7eTya6RPxXeJCqCJGHuCJ4GiRVLzkTXBAJMu2qaMWPrS7AANYqdq6vcBcBUdJCVVFceUvJFjaPdGZ2y9WACViL4L",
-      0);
+	("Fpub15bEDvvx1UUJ4PaffZKcT1zPvQLAvgRmTQJ4fzsRyy8Mshjh9STpuomWrXPHZ1Sc6fPdd4vA42BN1x1kQdhM33JVcKyB66ZLUJxNPNNsWRr",
+	 "Fprv4rbspRQ4B6uzquWCZXnc5t3fNNVgXDhv6BNTscTpRdbNzuQYbu9aN1T31DdFdosMREvDhfWPoWGrWWntRMSEFbULp9n9hJMwU5TQZVuhhdq",
+	  0x80000000)
+	("Fpub17xRxtm5gqqeFvg4thf7WGk4ckwZ5XqfrtY1VEZGvH3j8is9iwEgzGZEAFDoHN3MJ2tUQ2fttyNreQx6LsdXcHaSHRv4dx48xVKH3mNqqc1",
+	 "Fprv4ty5ZPEBrUHM3Sbbng8798oL4j74g57pVfcQgr9fMwWkFvY1BPvSSUEkJyybymCGsPZdicJGTEuKA4S2za1z1MfyFHhCSTdkb6R4Wsht5fW",
+	  0x0);
 
 void RunTest(const TestVector &test) {
     std::vector<unsigned char> seed = ParseHex(test.strHexMaster);
+#ifdef CREATE_NEW_TEST_DATA
+    std::cout << "  TestVector(\"" << test.strHexMaster << "\")\n";
+#endif
+    //used to store master key
     CExtKey key;
+
+    //used to store public key
     CExtPubKey pubkey;
+
+    //set master key from strHexMaster (nDepth=0,nChild=0)
     key.SetMaster(&seed[0], seed.size());
+
+    //set public key from master key
     pubkey = key.Neuter();
+
+
     for (const TestDerivation &derive : test.vDerive) {
         unsigned char data[74];
         key.Encode(data);
@@ -100,7 +118,9 @@ void RunTest(const TestVector &test) {
 
         // Test private key
         CBitcoinExtKey b58key; b58key.SetKey(key);
+#ifndef CREATE_NEW_TEST_DATA
         BOOST_CHECK(b58key.ToString() == derive.prv);
+#endif
 
         CBitcoinExtKey b58keyDecodeCheck(derive.prv);
         CExtKey checkKey = b58keyDecodeCheck.GetKey();
@@ -108,11 +128,20 @@ void RunTest(const TestVector &test) {
 
         // Test public key
         CBitcoinExtPubKey b58pubkey; b58pubkey.SetKey(pubkey);
+#ifndef CREATE_NEW_TEST_DATA
         BOOST_CHECK(b58pubkey.ToString() == derive.pub);
+#endif
 
         CBitcoinExtPubKey b58PubkeyDecodeCheck(derive.pub);
         CExtPubKey checkPubKey = b58PubkeyDecodeCheck.GetKey();
         assert(checkPubKey == pubkey); //ensure a base58 decoded pubkey also matches
+
+#ifdef CREATE_NEW_TEST_DATA
+        //create new data
+        std::cout << "    (\"" << b58pubkey.ToString() << "\",\n";
+        std::cout << "     \"" << b58key.ToString() << "\",\n";
+        std::cout << "      0x" << std::hex << derive.nChild << ")\n";
+#endif
 
         // Derive new keys
         CExtKey keyNew;
