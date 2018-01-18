@@ -16,9 +16,9 @@
 
 #include <boost/test/unit_test.hpp>
 
-//#define GENERATE_BITCOIN_ADDRESSES
+//#define GENERATE_FLO_DATA
 
-#ifdef GENERATE_BITCOIN_ADDRESSES
+#ifdef GENERATE_FLO_DATA
 #include <iostream>
 #endif
 
@@ -65,7 +65,7 @@ BOOST_AUTO_TEST_CASE(key_test1)
     addr1CBA.Set(pubkey1C.GetID());
     addr2CBA.Set(pubkey2C.GetID());
 
-#ifdef GENERATE_BITCOIN_ADDRESSES
+#ifdef GENERATE_FLO_DATA
     std::cout << "static const CBitcoinAddress addr1 (\"" << addr1BA.ToString() << "\");\n";
     std::cout << "static const CBitcoinAddress addr2 (\"" << addr2BA.ToString() << "\");\n";
     std::cout << "static const CBitcoinAddress addr1C(\"" << addr1CBA.ToString() << "\");\n";
@@ -162,7 +162,7 @@ BOOST_AUTO_TEST_CASE(key_test1)
     BOOST_CHECK(key1C.Sign(hashMsg, detsigc));
     BOOST_CHECK(detsig == detsigc);
     BOOST_CHECK(detsig == ParseHex("30450221008eb06cff5d3e674ec8cd6ff8178a5537af23339bcf646407fb3f4d59ff9b51560220267cca388c801f470890eb636f24eed2b432776789944435eb0b32bdf26dcf9a"));
-#ifdef GENERATE_BITCOIN_ADDRESSES
+#ifdef GENERATE_FLO_DATA
     std::cout << "detsig == ParseHex(\"";
     for (std::vector<unsigned char>::const_iterator i = detsig.begin(); i != detsig.end(); ++i)
         std::cout << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(*i);
@@ -172,7 +172,7 @@ BOOST_AUTO_TEST_CASE(key_test1)
     BOOST_CHECK(key2C.Sign(hashMsg, detsigc));
     BOOST_CHECK(detsig == detsigc);
     BOOST_CHECK(detsig == ParseHex("3045022100b0208c440f805a57c654491518f6a7c699abd1767bfa738fc676fc5cb430395302206bb4ad99d6a0f952814f33816d4211ce36d7a5c116255927cf9b6b8d4779c276"));
-#ifdef GENERATE_BITCOIN_ADDRESSES
+#ifdef GENERATE_FLO_DATA
     std::cout << "detsig == ParseHex(\"";
     for (std::vector<unsigned char>::const_iterator i = detsig.begin(); i != detsig.end(); ++i)
         std::cout << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(*i);
@@ -181,14 +181,14 @@ BOOST_AUTO_TEST_CASE(key_test1)
     BOOST_CHECK(key1.SignCompact(hashMsg, detsig));
     BOOST_CHECK(key1C.SignCompact(hashMsg, detsigc));
     BOOST_CHECK(detsig == ParseHex("1b8eb06cff5d3e674ec8cd6ff8178a5537af23339bcf646407fb3f4d59ff9b5156267cca388c801f470890eb636f24eed2b432776789944435eb0b32bdf26dcf9a"));
-#ifdef GENERATE_BITCOIN_ADDRESSES
+#ifdef GENERATE_FLO_DATA
     std::cout << "detsig == ParseHex(\"";
     for (std::vector<unsigned char>::const_iterator i = detsig.begin(); i != detsig.end(); ++i)
         std::cout << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(*i);
     std::cout << ")\n";
 #endif
     BOOST_CHECK(detsigc == ParseHex("1f8eb06cff5d3e674ec8cd6ff8178a5537af23339bcf646407fb3f4d59ff9b5156267cca388c801f470890eb636f24eed2b432776789944435eb0b32bdf26dcf9a"));
-#ifdef GENERATE_BITCOIN_ADDRESSES
+#ifdef GENERATE_FLO_DATA
     std::cout << "detsigc == ParseHex(\"";
     for (std::vector<unsigned char>::const_iterator i = detsigc.begin(); i != detsigc.end(); ++i)
         std::cout << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(*i);
@@ -197,14 +197,14 @@ BOOST_AUTO_TEST_CASE(key_test1)
     BOOST_CHECK(key2.SignCompact(hashMsg, detsig));
     BOOST_CHECK(key2C.SignCompact(hashMsg, detsigc));
     BOOST_CHECK(detsig == ParseHex("1cb0208c440f805a57c654491518f6a7c699abd1767bfa738fc676fc5cb43039536bb4ad99d6a0f952814f33816d4211ce36d7a5c116255927cf9b6b8d4779c276"));
-#ifdef GENERATE_BITCOIN_ADDRESSES
+#ifdef GENERATE_FLO_DATA
     std::cout << "detsig == ParseHex(\"";
     for (std::vector<unsigned char>::const_iterator i = detsig.begin(); i != detsig.end(); ++i)
         std::cout << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(*i);
     std::cout << ")\n";
 #endif
     BOOST_CHECK(detsigc == ParseHex("20b0208c440f805a57c654491518f6a7c699abd1767bfa738fc676fc5cb43039536bb4ad99d6a0f952814f33816d4211ce36d7a5c116255927cf9b6b8d4779c276"));
-#ifdef GENERATE_BITCOIN_ADDRESSES
+#ifdef GENERATE_FLO_DATA
     std::cout << "detsigc == ParseHex(\"";
     for (std::vector<unsigned char>::const_iterator i = detsigc.begin(); i != detsigc.end(); ++i)
         std::cout << std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(*i);
