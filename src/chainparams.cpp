@@ -171,10 +171,10 @@ public:
         vSeeds.emplace_back("ind.entertheblockchain.com", false);
         vSeeds.emplace_back("de.entertheblockchain.com", false);
 
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,35);
-        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,8);
-        base58Prefixes[SCRIPT_ADDRESS2] = std::vector<unsigned char>(1,94);
-        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,163);
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,35);  //F
+        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,8);   //4
+        base58Prefixes[SCRIPT_ADDRESS2] = std::vector<unsigned char>(1,94); //e or f
+        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,163); //2
         base58Prefixes[EXT_PUBLIC_KEY] = {0x01, 0x34, 0x40, 0x6b}; //Fpub, Fprv for mainnet
         base58Prefixes[EXT_SECRET_KEY] = {0x01, 0x34, 0x3c, 0x31};
 

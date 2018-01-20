@@ -11,6 +11,8 @@
 #include "uint256.h"
 #include "util.h"
 
+#include <iostream>
+
 unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params)
 {
     assert(pindexLast != nullptr);
@@ -109,6 +111,10 @@ bool CheckProofOfWork(uint256 hash, unsigned int nBits, const Consensus::Params&
     // Check range
     if (fNegative || bnTarget == 0 || fOverflow || bnTarget > UintToArith256(params.powLimit))
         return false;
+
+//    uint256 target=ArithToUint256(bnTarget);
+//    std::cout << "target: " << target.ToString() << "\thash: " << hash.ToString() << "\n";
+
 
     // Check proof of work matches claimed amount
     if (UintToArith256(hash) > bnTarget)
