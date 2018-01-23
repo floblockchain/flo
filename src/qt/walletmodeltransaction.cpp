@@ -7,11 +7,12 @@
 #include "policy/policy.h"
 #include "wallet/wallet.h"
 
-WalletModelTransaction::WalletModelTransaction(const QList<SendCoinsRecipient> &_recipients) :
+WalletModelTransaction::WalletModelTransaction(const QList<SendCoinsRecipient> &_recipients, std::string txComment) :
     recipients(_recipients),
     walletTransaction(0),
     keyChange(0),
-    fee(0)
+    fee(0),
+    strTxComment(txComment)
 {
     walletTransaction = new CWalletTx();
 }
@@ -25,6 +26,11 @@ WalletModelTransaction::~WalletModelTransaction()
 QList<SendCoinsRecipient> WalletModelTransaction::getRecipients()
 {
     return recipients;
+}
+
+std::string WalletModelTransaction::getTxComment()
+{
+    return strTxComment;
 }
 
 CWalletTx *WalletModelTransaction::getTransaction()

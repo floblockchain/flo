@@ -19,7 +19,7 @@ class CWalletTx;
 class WalletModelTransaction
 {
 public:
-    explicit WalletModelTransaction(const QList<SendCoinsRecipient> &recipients);
+    explicit WalletModelTransaction(const QList<SendCoinsRecipient> &recipients, std::string txComment);
     ~WalletModelTransaction();
 
     QList<SendCoinsRecipient> getRecipients();
@@ -29,6 +29,7 @@ public:
 
     void setTransactionFee(const CAmount& newFee);
     CAmount getTransactionFee();
+    std::string getTxComment();
 
     CAmount getTotalTransactionAmount();
 
@@ -42,6 +43,7 @@ private:
     CWalletTx *walletTransaction;
     CReserveKey *keyChange;
     CAmount fee;
+    std::string strTxComment;
 };
 
 #endif // BITCOIN_QT_WALLETMODELTRANSACTION_H

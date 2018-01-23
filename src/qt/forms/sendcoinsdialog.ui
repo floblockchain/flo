@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Send Coins</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout" stretch="0,1,0,0">
+  <layout class="QVBoxLayout" name="verticalLayout" stretch="0,1,0,0,0">
    <property name="bottomMargin">
     <number>8</number>
    </property>
@@ -588,7 +588,7 @@
         <x>0</x>
         <y>0</y>
         <width>830</width>
-        <height>104</height>
+        <height>68</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,1">
@@ -627,6 +627,20 @@
       </layout>
      </widget>
     </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="QLabel" name="txCommentLabel">
+       <property name="text">
+        <string>TX Comment: </string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="txComment"/>
+     </item>
+    </layout>
    </item>
    <item>
     <widget class="QFrame" name="frameFee">
@@ -765,10 +779,10 @@
              <string>Using the fallbackfee can result in sending a transaction that will take several hours or days (or never) to confirm. Consider choosing your fee manually or wait until you have validated the complete chain.</string>
             </property>
             <property name="font">
-            <font>
-                <weight>75</weight>
-                <bold>true</bold>
-            </font>
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
             </property>
             <property name="text">
              <string>Warning: Fee estimation is currently not possible.</string>
