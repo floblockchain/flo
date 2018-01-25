@@ -7,7 +7,7 @@
 This file is modified from python-bitcoinlib.
 """
 
-from .mininode import CTransaction, CTxOut, sha256, hash256, uint256_from_str, ser_uint256, ser_string
+from .mininode import CTransaction, CTxOut, sha256, hash256, uint256_from_str, ser_uint256, ser_string, ser_compact_size
 from binascii import hexlify
 import hashlib
 
@@ -935,5 +935,9 @@ def SegwitVersion1SignatureHash(script, txTo, inIdx, hashtype, amount):
     ss += ser_uint256(hashOutputs)
     ss += struct.pack("<i", txTo.nLockTime)
     ss += struct.pack("<I", hashtype)
+    if txTo.nVersion >= 2:
+        ss += ser_compact_size(len(txTo.txComment))
+        if len(txTo.txComment) > 0:
+            ss += struct.pack("<s", txTo.txComment)
 
     return hash256(ss)
