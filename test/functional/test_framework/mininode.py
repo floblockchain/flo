@@ -427,13 +427,14 @@ class CTxWitness(object):
 class CTransaction(object):
     def __init__(self, tx=None):
         if tx is None:
-            self.nVersion = 1
+            self.nVersion = 2
             self.vin = []
             self.vout = []
             self.wit = CTxWitness()
             self.nLockTime = 0
             self.sha256 = None
             self.hash = None
+            self.txComment = ""
         else:
             self.nVersion = tx.nVersion
             self.vin = copy.deepcopy(tx.vin)
@@ -442,6 +443,7 @@ class CTransaction(object):
             self.sha256 = tx.sha256
             self.hash = tx.hash
             self.wit = copy.deepcopy(tx.wit)
+            self.txComment = '%s' % tx.txComment
 
     def deserialize(self, f):
         self.nVersion = struct.unpack("<i", f.read(4))[0]
@@ -460,6 +462,12 @@ class CTransaction(object):
             self.wit.vtxinwit = [CTxInWitness() for i in range(len(self.vin))]
             self.wit.deserialize(f)
         self.nLockTime = struct.unpack("<I", f.read(4))[0]
+        if self.nVersion >= 2:
+            tx_comment_len = deser_compact_size(f)
+            if tx_comment_len > 0:
+                self.txComment = struct.unpack("<s", f.read(tx_comment_len))[0]
+            else:
+                self.txComment = ""
         self.sha256 = None
         self.hash = None
 
@@ -469,6 +477,11 @@ class CTransaction(object):
         r += ser_vector(self.vin)
         r += ser_vector(self.vout)
         r += struct.pack("<I", self.nLockTime)
+        if self.nVersion >= 2:
+            r += ser_compact_size(len(self.txComment))
+            if len(self.txComment) > 0:
+                r += struct.pack("<s", self.txComment)
+
         return r
 
     # Only serialize with witness when explicitly called for
@@ -492,6 +505,11 @@ class CTransaction(object):
                     self.wit.vtxinwit.append(CTxInWitness())
             r += self.wit.serialize()
         r += struct.pack("<I", self.nLockTime)
+        if self.nVersion >= 2:
+            r += ser_compact_size(len(self.txComment))
+            if len(self.txComment) > 0:
+                r += struct.pack("<s", self.txComment)
+        
         return r
 
     # Regular serialization is without witness -- must explicitly
@@ -1674,8 +1692,8 @@ class NodeConn(asyncore.dispatcher):
         b"blocktxn": msg_blocktxn
     }
     MAGIC_BYTES = {
-        "mainnet": b"\xfb\xc0\xb6\xdb",   # mainnet
-        "testnet3": b"\xfc\xc1\xb7\xdc",  # testnet3
+        "mainnet": b"\xfd\xc0\xa5\xf1",   # mainnet
+        "testnet3": b"\xfd\xc0\x5a\xf2",  # testnet3
         "regtest": b"\xfa\xbf\xb5\xda",   # regtest
     }
 

@@ -359,7 +359,7 @@ class FullBlockTest(ComparisonTestFramework):
         tip(15)
         b23 = block(23, spend=out[6])
         tx = CTransaction()
-        script_length = MAX_BLOCK_BASE_SIZE - len(b23.serialize()) - 69
+        script_length = MAX_BLOCK_BASE_SIZE - len(b23.serialize()) - 69 - 1 #subtract 1 for txComment byte
         script_output = CScript([b'\x00' * script_length])
         tx.vout.append(CTxOut(0, script_output))
         tx.vin.append(CTxIn(COutPoint(b23.vtx[1].sha256, 0)))
@@ -372,7 +372,7 @@ class FullBlockTest(ComparisonTestFramework):
         # Make the next block one byte bigger and check that it fails
         tip(15)
         b24 = block(24, spend=out[6])
-        script_length = MAX_BLOCK_BASE_SIZE - len(b24.serialize()) - 69
+        script_length = MAX_BLOCK_BASE_SIZE - len(b24.serialize()) - 69 - 1 #subtract 1 for txComment byte
         script_output = CScript([b'\x00' * (script_length+1)])
         tx.vout = [CTxOut(0, script_output)]
         b24 = update_block(24, [tx])
@@ -788,7 +788,7 @@ class FullBlockTest(ComparisonTestFramework):
         assert_equal(len(b56p2.vtx),6)
         b56p2 = update_block("b56p2", [tx3, tx4])
         yield rejected(RejectResult(16, b'bad-txns-duplicate'))
-
+        
         tip("57p2")
         yield accepted()
 
@@ -813,10 +813,10 @@ class FullBlockTest(ComparisonTestFramework):
         b58 = update_block(58, [tx])
         yield rejected(RejectResult(16, b'bad-txns-inputs-missingorspent'))
 
-        # tx with output value > input value out of range
+     # tx with output value > input value out of range
         tip(57)
         b59 = block(59)
-        tx = create_and_sign_tx(out[17].tx, out[17].n, 51*COIN)
+        tx = create_and_sign_tx(out[17].tx, out[17].n, 101*COIN)
         b59 = update_block(59, [tx])
         yield rejected(RejectResult(16, b'bad-txns-in-belowout'))
 
@@ -901,7 +901,7 @@ class FullBlockTest(ComparisonTestFramework):
         tx = CTransaction()
 
         # use canonical serialization to calculate size
-        script_length = MAX_BLOCK_BASE_SIZE - len(b64a.normal_serialize()) - 69
+        script_length = MAX_BLOCK_BASE_SIZE - len(b64a.normal_serialize()) - 69 - 1  #subtract 1 for txComment byte
         script_output = CScript([b'\x00' * script_length])
         tx.vout.append(CTxOut(0, script_output))
         tx.vin.append(CTxIn(COutPoint(b64a.vtx[1].sha256, 0)))
@@ -1250,7 +1250,7 @@ class FullBlockTest(ComparisonTestFramework):
             for i in range(89, LARGE_REORG_SIZE + 89):
                 b = block(i, spend)
                 tx = CTransaction()
-                script_length = MAX_BLOCK_BASE_SIZE - len(b.serialize()) - 69
+                script_length = MAX_BLOCK_BASE_SIZE - len(b.serialize()) - 69 - 1  #subtract 1 for txComment byte
                 script_output = CScript([b'\x00' * script_length])
                 tx.vout.append(CTxOut(0, script_output))
                 tx.vin.append(CTxIn(COutPoint(b.vtx[1].sha256, 0)))

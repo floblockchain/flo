@@ -102,7 +102,7 @@ class InvalidBlockRequestTest(ComparisonTestFramework):
         '''
         block3 = create_block(self.tip, create_coinbase(height), self.block_time)
         self.block_time += 1
-        block3.vtx[0].vout[0].nValue = 100 * COIN # Too high!
+        block3.vtx[0].vout[0].nValue = 200 * COIN # Too high!
         block3.vtx[0].sha256=None
         block3.vtx[0].calc_sha256()
         block3.hashMerkleRoot = block3.calc_merkle_root()

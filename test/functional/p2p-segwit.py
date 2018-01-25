@@ -758,6 +758,10 @@ class SegWitTest(BitcoinTestFramework):
                 if flags & 1:
                     r += self.wit.serialize()
                 r += struct.pack("<I", self.nLockTime)
+                if self.nVersion >= 2:
+                    r += ser_compact_size(len(self.txComment))
+                    if len(self.txComment) > 0:
+                        r += struct.pack("<s", self.txComment)
                 return r
 
         tx2 = BrokenCTransaction()
