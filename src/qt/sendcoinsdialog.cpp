@@ -262,6 +262,8 @@ void SendCoinsDialog::on_sendButton_clicked()
 
     // prepare transaction for getting txFee earlier
     std::string txComment = ui->txComment->text().toStdString();
+    if (!txComment.empty())
+        txComment = "text:" + txComment;
     WalletModelTransaction currentTransaction(recipients, txComment);
     WalletModel::SendCoinsReturn prepareStatus;
 
