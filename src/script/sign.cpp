@@ -27,7 +27,13 @@ bool TransactionSignatureCreator::CreateSig(std::vector<unsigned char>& vchSig, 
     if (sigversion == SIGVERSION_WITNESS_V0 && !key.IsCompressed())
         return false;
 
-    uint256 hash = SignatureHash(scriptCode, *txTo, nIn, nHashType, amount, sigversion);
+    int tempHashType = nHashType;
+    if (sigversion != SIGVERSION_WITNESS_V0) {
+        // Compatibility with v0.10.4 requires not signing the tx comment
+        // Once v0.10.4 is sufficiently fazed out this should be removed
+        tempHashType |= SIGHASH_OMIT_TX_COMMENT;
+    }
+    uint256 hash = SignatureHash(scriptCode, *txTo, nIn, tempHashType, amount, sigversion);
     if (!key.Sign(hash, vchSig))
         return false;
     vchSig.push_back((unsigned char)nHashType);
