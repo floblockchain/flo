@@ -936,8 +936,6 @@ def SegwitVersion1SignatureHash(script, txTo, inIdx, hashtype, amount):
     ss += struct.pack("<i", txTo.nLockTime)
     ss += struct.pack("<I", hashtype)
     if txTo.nVersion >= 2:
-        ss += ser_compact_size(len(txTo.txComment))
-        if len(txTo.txComment) > 0:
-            ss += struct.pack("<s", txTo.txComment)
+        ss += ser_string(txTo.txComment)
 
     return hash256(ss)
