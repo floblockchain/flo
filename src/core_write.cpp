@@ -204,9 +204,7 @@ void TxToUniv(const CTransaction& tx, const uint256& hashBlock, UniValue& entry,
     }
     entry.pushKV("vout", vout);
 
-    if (tx.nVersion >= 2) {
-        entry.pushKV("tx-comment", tx.strTxComment);
-    }
+    entry.pushKV("tx-comment", tx.strTxComment);
 
     if (!hashBlock.IsNull())
         entry.pushKV("blockhash", hashBlock.GetHex());
