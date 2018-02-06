@@ -17,10 +17,11 @@
                 "reqSigs": 1,
                 "type": "scripthash",
                 "addresses": [
-                    "MAVWzxXm8KGkZTesqLtqywzrvbs96FEoKy"
+                    "esN4KjeSNFfJYXnguoYsKTyUcoCeJMFetL"
                 ]
             }
         }
     ],
+    "tx-comment": "",
     "hex": "01000000000100e1f5050000000017a9141c6fbaf46d64221e80cbae182c33ddf81b9294ac8700000000"
 }
