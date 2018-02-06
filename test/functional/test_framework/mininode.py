@@ -443,7 +443,7 @@ class CTransaction(object):
             self.sha256 = tx.sha256
             self.hash = tx.hash
             self.wit = copy.deepcopy(tx.wit)
-            self.txComment = b'%s' % tx.txComment
+            self.txComment = tx.txComment
 
     def deserialize(self, f):
         self.nVersion = struct.unpack("<i", f.read(4))[0]
