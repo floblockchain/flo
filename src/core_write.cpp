@@ -205,7 +205,7 @@ void TxToUniv(const CTransaction& tx, const uint256& hashBlock, UniValue& entry,
     }
     entry.pushKV("vout", vout);
 
-    entry.pushKV("tx-comment", tx.strTxComment);
+    entry.pushKV("flo-data", tx.strFloData);
 
     if (!hashBlock.IsNull())
         entry.pushKV("blockhash", hashBlock.GetHex());

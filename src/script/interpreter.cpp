@@ -1058,7 +1058,7 @@ private:
     const bool fAnyoneCanPay;  //!< whether the hashtype has the SIGHASH_ANYONECANPAY flag set
     const bool fHashSingle;    //!< whether the hashtype is SIGHASH_SINGLE
     const bool fHashNone;      //!< whether the hashtype is SIGHASH_NONE
-    const bool fOmitTxComment; //!< whether the hashtype has the SIGHASH_OMIT_TX_COMMENT flag set
+    const bool fOmitFloData; //!< whether the hashtype has the SIGHASH_OMIT_FLO_DATA flag set
 
 public:
     CTransactionSignatureSerializer(const CTransaction &txToIn, const CScript &scriptCodeIn, unsigned int nInIn, int nHashTypeIn) :
@@ -1066,7 +1066,7 @@ public:
         fAnyoneCanPay(!!(nHashTypeIn & SIGHASH_ANYONECANPAY)),
         fHashSingle((nHashTypeIn & 0x1f) == SIGHASH_SINGLE),
         fHashNone((nHashTypeIn & 0x1f) == SIGHASH_NONE),
-        fOmitTxComment(!!(nHashTypeIn & SIGHASH_OMIT_TX_COMMENT)){}
+        fOmitFloData(!!(nHashTypeIn & SIGHASH_OMIT_FLO_DATA)){}
 
     /** Serialize the passed scriptCode, skipping OP_CODESEPARATORs */
     template<typename S>
@@ -1140,9 +1140,9 @@ public:
              SerializeOutput(s, nOutput);
         // Serialize nLockTime
         ::Serialize(s, txTo.nLockTime);
-        // Serialize strTxComment
-        if (txTo.nVersion >= 2 && fOmitTxComment == 0)
-        	 ::Serialize(s, txTo.strTxComment);
+        // Serialize strFloData
+        if (txTo.nVersion >= 2 && fOmitFloData == 0)
+        	 ::Serialize(s, txTo.strFloData);
     }
 };
 
@@ -1220,9 +1220,9 @@ uint256 SignatureHash(const CScript& scriptCode, const CTransaction& txTo, unsig
         ss << hashOutputs;
         // Locktime
         ss << txTo.nLockTime;
-        // TX Comment
+        // FLO Data
         if (txTo.nVersion >= 2)
-            ss << txTo.strTxComment;
+            ss << txTo.strFloData;
         // Sighash type
         ss << nHashType;
 
@@ -1249,7 +1249,7 @@ uint256 SignatureHash(const CScript& scriptCode, const CTransaction& txTo, unsig
 
     // Serialize and hash
     CHashWriter ss(SER_GETHASH, 0);
-    nHashType &= ~SIGHASH_OMIT_TX_COMMENT; // clear SIGHASH_OMIT_TX_COMMENT - Flag is only used for 0.10.4 compat
+    nHashType &= ~SIGHASH_OMIT_FLO_DATA; // clear SIGHASH_OMIT_FLO_DATA - Flag is only used for 0.10.4 compat
                                            // it's used internally but must not actually appear in the result
 
     ss << txTmp << nHashType;
@@ -1277,8 +1277,8 @@ bool TransactionSignatureChecker::CheckSig(const std::vector<unsigned char>& vch
     uint256 sighash = SignatureHash(scriptCode, *txTo, nIn, nHashType, amount, sigversion, this->txdata);
 
     if (!VerifySignature(vchSig, pubkey, sighash)){
-        // Verification failed, toggle SIGHASH_OMIT_TX_COMMENT and try again
-        nHashType ^= SIGHASH_OMIT_TX_COMMENT;
+        // Verification failed, toggle SIGHASH_OMIT_FLO_DATA and try again
+        nHashType ^= SIGHASH_OMIT_FLO_DATA;
 
         // need a new vchSig
         std::vector<unsigned char> vchSig2(vchSigIn);

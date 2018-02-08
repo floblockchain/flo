@@ -435,7 +435,7 @@ class CTransaction(object):
             self.nLockTime = 0
             self.sha256 = None
             self.hash = None
-            self.txComment = b""
+            self.floData = b""
         else:
             self.nVersion = tx.nVersion
             self.vin = copy.deepcopy(tx.vin)
@@ -444,7 +444,7 @@ class CTransaction(object):
             self.sha256 = tx.sha256
             self.hash = tx.hash
             self.wit = copy.deepcopy(tx.wit)
-            self.txComment = tx.txComment
+            self.floData = tx.floData
 
     def deserialize(self, f):
         self.nVersion = struct.unpack("<i", f.read(4))[0]
@@ -464,7 +464,7 @@ class CTransaction(object):
             self.wit.deserialize(f)
         self.nLockTime = struct.unpack("<I", f.read(4))[0]
         if self.nVersion >= 2:
-            self.txComment = deser_string(f)
+            self.floData = deser_string(f)
         self.sha256 = None
         self.hash = None
 
@@ -475,7 +475,7 @@ class CTransaction(object):
         r += ser_vector(self.vout)
         r += struct.pack("<I", self.nLockTime)
         if self.nVersion >= 2:
-            r += ser_string(self.txComment)
+            r += ser_string(self.floData)
         return r
 
     # Only serialize with witness when explicitly called for
@@ -500,7 +500,7 @@ class CTransaction(object):
             r += self.wit.serialize()
         r += struct.pack("<I", self.nLockTime)
         if self.nVersion >= 2:
-            r += ser_string(self.txComment)
+            r += ser_string(self.floData)
         return r
 
     # Regular serialization is without witness -- must explicitly

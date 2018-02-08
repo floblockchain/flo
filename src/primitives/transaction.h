@@ -228,7 +228,7 @@ inline void UnserializeTransaction(TxType& tx, Stream& s) {
     }
     s >> tx.nLockTime;
     if (tx.nVersion >= 2) {
-        s >> tx.strTxComment;
+        s >> tx.strFloData;
     }
 }
 
@@ -260,7 +260,7 @@ inline void SerializeTransaction(const TxType& tx, Stream& s) {
     }
     s << tx.nLockTime;
     if (tx.nVersion >= 2) {
-        s << tx.strTxComment;
+        s << tx.strFloData;
     }
 }
 
@@ -289,7 +289,7 @@ public:
     const std::vector<CTxIn> vin;
     const std::vector<CTxOut> vout;
     const uint32_t nLockTime;
-    const std::string strTxComment;
+    const std::string strFloData;
 
 private:
     /** Memory only. */
@@ -373,7 +373,7 @@ struct CMutableTransaction
     std::vector<CTxIn> vin;
     std::vector<CTxOut> vout;
     uint32_t nLockTime;
-    std::string strTxComment;
+    std::string strFloData;
 
     CMutableTransaction();
     CMutableTransaction(const CTransaction& tx);

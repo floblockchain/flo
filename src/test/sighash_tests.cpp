@@ -136,7 +136,7 @@ BOOST_AUTO_TEST_CASE(sighash_test)
     #endif
     for (int i=0; i<nRandomTests; i++) {
         int nHashType = InsecureRand32();
-        nHashType &= ~SIGHASH_OMIT_TX_COMMENT; // clear SIGHASH_OMIT_TX_COMMENT - Flag is only used for 0.10.4 compat
+        nHashType &= ~SIGHASH_OMIT_FLO_DATA; // clear SIGHASH_OMIT_FLO_DATA - Flag is only used for 0.10.4 compat
         CMutableTransaction txTo;
         RandomTransaction(txTo, (nHashType & 0x1f) == SIGHASH_SINGLE);
         CScript scriptCode;
