@@ -262,10 +262,10 @@ void SendCoinsDialog::on_sendButton_clicked()
     }
 
     // prepare transaction for getting txFee earlier
-    std::string txComment = ui->txComment->text().toStdString();
-    if (!txComment.empty())
-        txComment = "text:" + txComment;
-    WalletModelTransaction currentTransaction(recipients, txComment);
+    std::string floData = ui->floData->text().toStdString();
+    if (!floData.empty())
+        floData = "text:" + floData;
+    WalletModelTransaction currentTransaction(recipients, floData);
     WalletModel::SendCoinsReturn prepareStatus;
 
     // Always use a CCoinControl instance, use the CoinControlDialog instance if CoinControl has been enabled

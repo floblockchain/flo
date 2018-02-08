@@ -631,14 +631,14 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
-      <widget class="QLabel" name="txCommentLabel">
+      <widget class="QLabel" name="floDataLabel">
        <property name="text">
-        <string>TX Comment: </string>
+        <string>FLO Data: </string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="txComment"/>
+      <widget class="QLineEdit" name="floData"/>
      </item>
     </layout>
    </item>

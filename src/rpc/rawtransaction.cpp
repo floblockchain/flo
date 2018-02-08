@@ -292,7 +292,7 @@ UniValue createrawtransaction(const JSONRPCRequest& request)
 {
     if (request.fHelp || request.params.size() < 2 || request.params.size() > 5)
         throw std::runtime_error(
-            "createrawtransaction [{\"txid\":\"id\",\"vout\":n},...] {\"address\":amount,\"data\":\"hex\",...} ( locktime ) ( replaceable ) ( txcomment )\n"
+            "createrawtransaction [{\"txid\":\"id\",\"vout\":n},...] {\"address\":amount,\"data\":\"hex\",...} ( locktime ) ( replaceable ) ( flodata )\n"
             "\nCreate a transaction spending the given inputs and creating new outputs.\n"
             "Outputs can be addresses or data.\n"
             "Returns hex-encoded raw transaction.\n"
@@ -318,7 +318,7 @@ UniValue createrawtransaction(const JSONRPCRequest& request)
             "3. locktime                  (numeric, optional, default=0) Raw locktime. Non-0 value also locktime-activates inputs\n"
             "4. replaceable               (boolean, optional, default=false) Marks this transaction as BIP125 replaceable.\n"
             "                             Allows this transaction to be replaced by a transaction with higher fees. If provided, it is an error if explicit sequence numbers are incompatible.\n"
-            "5. tx-comment                (string, optional) Transaction tx-comment (default = \"\").\n"
+            "5. flo-data                 (string, optional) Transaction flo-data (default = \"\").\n"
             "\nResult:\n"
             "\"transaction\"              (string) hex string of the transaction\n"
 
@@ -347,9 +347,9 @@ UniValue createrawtransaction(const JSONRPCRequest& request)
 
     bool rbfOptIn = request.params.size() > 3 ? request.params[3].isTrue() : false;
 
-    rawTx.strTxComment = "";
+    rawTx.strFloData = "";
     if (request.params.size() > 4 && !request.params[4].isNull()) {
-        rawTx.strTxComment = request.params[4].get_str();
+        rawTx.strFloData = request.params[4].get_str();
     }
 
     for (unsigned int idx = 0; idx < inputs.size(); idx++) {
@@ -587,18 +587,18 @@ UniValue combinerawtransaction(const JSONRPCRequest& request)
     UniValue txs = request.params[0].get_array();
     std::vector<CMutableTransaction> txVariants(txs.size());
 
-    bool commentExists = false;
-    std::string strTxComment = "";
+    bool floDataExists = false;
+    std::string strFloData = "";
     for (unsigned int idx = 0; idx < txs.size(); idx++) {
         if (!DecodeHexTx(txVariants[idx], txs[idx].get_str(), true)) {
             throw JSONRPCError(RPC_DESERIALIZATION_ERROR, strprintf("TX decode failed for tx %d", idx));
         }
-        if (txVariants[idx].strTxComment != "") {
-            if (commentExists) {
-                throw JSONRPCError(RPC_VERIFY_ERROR, "Only one transaction comment is allowed");
+        if (txVariants[idx].strFloData != "") {
+            if (floDataExists) {
+                throw JSONRPCError(RPC_VERIFY_ERROR, "Only one transaction floData is allowed");
             }
-            commentExists = true;
-            strTxComment = txVariants[idx].strTxComment;
+            floDataExists = true;
+            strFloData = txVariants[idx].strFloData;
         }
     }
 
@@ -609,7 +609,7 @@ UniValue combinerawtransaction(const JSONRPCRequest& request)
     // mergedTx will end up with all the signatures; it
     // starts as a clone of the rawtx:
     CMutableTransaction mergedTx(txVariants[0]);
-    mergedTx.strTxComment = strTxComment;
+    mergedTx.strFloData = strFloData;
 
     // Fetch previous transactions (inputs):
     CCoinsView viewDummy;
@@ -980,7 +980,7 @@ static const CRPCCommand commands[] =
 { //  category              name                      actor (function)         okSafeMode
   //  --------------------- ------------------------  -----------------------  ----------
     { "rawtransactions",    "getrawtransaction",      &getrawtransaction,      true,  {"txid","verbose"} },
-    { "rawtransactions",    "createrawtransaction",   &createrawtransaction,   true,  {"inputs","outputs","locktime","replaceable","tx-comment"} },
+    { "rawtransactions",    "createrawtransaction",   &createrawtransaction,   true,  {"inputs","outputs","locktime","replaceable","flo-data"} },
     { "rawtransactions",    "decoderawtransaction",   &decoderawtransaction,   true,  {"hexstring"} },
     { "rawtransactions",    "decodescript",           &decodescript,           true,  {"hexstring"} },
     { "rawtransactions",    "sendrawtransaction",     &sendrawtransaction,     false, {"hexstring","allowhighfees"} },

@@ -271,9 +271,9 @@ QString TransactionDesc::toHTML(CWallet *wallet, CWalletTx &wtx, TransactionReco
         strHTML += "<br>" + tr("Generated coins must mature %1 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to \"not accepted\" and it won't be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.").arg(QString::number(numBlocksToMaturity)) + "<br>";
     }
 
-    // Transaction Comment
-    if (!wtx.tx->strTxComment.empty())
-        strHTML += "<br><b>" + tr("Transaction Comment") + ":</b><br>" + GUIUtil::HtmlEscape(wtx.tx->strTxComment, true) + "<br>";
+    // FLO Data
+    if (!wtx.tx->strFloData.empty())
+        strHTML += "<br><b>" + tr("FLO Data") + ":</b><br>" + GUIUtil::HtmlEscape(wtx.tx->strFloData, true) + "<br>";
 
     //
     // Debug view

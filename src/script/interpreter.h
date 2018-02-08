@@ -26,7 +26,7 @@ enum
     SIGHASH_NONE = 2,
     SIGHASH_SINGLE = 3,
     SIGHASH_ANYONECANPAY = 0x80,
-    SIGHASH_OMIT_TX_COMMENT = (1U << 6),
+    SIGHASH_OMIT_FLO_DATA = (1U << 6),
 };
 
 /** Script verification flags */

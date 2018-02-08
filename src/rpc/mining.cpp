@@ -106,7 +106,7 @@ UniValue getnetworkhashps(const JSONRPCRequest& request)
     return GetNetworkHashPS(!request.params[0].isNull() ? request.params[0].get_int() : 120, !request.params[1].isNull() ? request.params[1].get_int() : -1);
 }
 
-UniValue generateBlocks(std::shared_ptr<CReserveScript> coinbaseScript, int nGenerate, uint64_t nMaxTries, bool keepScript, std::string strTxComment)
+UniValue generateBlocks(std::shared_ptr<CReserveScript> coinbaseScript, int nGenerate, uint64_t nMaxTries, bool keepScript, std::string strFloData)
 {
     static const int nInnerLoopCount = 0x10000;
     int nHeightEnd = 0;
@@ -121,7 +121,7 @@ UniValue generateBlocks(std::shared_ptr<CReserveScript> coinbaseScript, int nGen
     UniValue blockHashes(UniValue::VARR);
     while (nHeight < nHeightEnd)
     {
-       std::unique_ptr<CBlockTemplate> pblocktemplate(BlockAssembler(Params()).CreateNewBlock(coinbaseScript->reserveScript, true, strTxComment));
+       std::unique_ptr<CBlockTemplate> pblocktemplate(BlockAssembler(Params()).CreateNewBlock(coinbaseScript->reserveScript, true, strFloData));
        if (!pblocktemplate.get())
             throw JSONRPCError(RPC_INTERNAL_ERROR, "Couldn't create new block");
         CBlock *pblock = &pblocktemplate->block;
@@ -164,7 +164,7 @@ UniValue generatetoaddress(const JSONRPCRequest& request)
             "1. nblocks      (numeric, required) How many blocks are generated immediately.\n"
             "2. address      (string, required) The address to send the newly generated flo to.\n"
             "3. maxtries     (numeric, optional) How many iterations to try (default = 1000000).\n"
-            "4. tx-comment   (string, optional) Coinbase transaction tx-comment (default = \"\").\n"
+            "4. flo-data     (string, optional) Coinbase transaction flo-data (default = \"\").\n"
             "\nResult:\n"
             "[ blockhashes ]     (array) hashes of blocks generated\n"
             "\nExamples:\n"
@@ -178,9 +178,9 @@ UniValue generatetoaddress(const JSONRPCRequest& request)
         nMaxTries = request.params[2].get_int();
     }
 
-    std::string coinbaseTxComment = "";
+    std::string coinbaseFloData = "";
     if (!request.params[3].isNull()) {
-        coinbaseTxComment = request.params[3].get_str();
+        coinbaseFloData = request.params[3].get_str();
     }
 
     CBitcoinAddress address(request.params[1].get_str());
@@ -192,7 +192,7 @@ UniValue generatetoaddress(const JSONRPCRequest& request)
 
 
 
-    return generateBlocks(coinbaseScript, nGenerate, nMaxTries, false, coinbaseTxComment);
+    return generateBlocks(coinbaseScript, nGenerate, nMaxTries, false, coinbaseFloData);
 }
 
 UniValue getmininginfo(const JSONRPCRequest& request)
