@@ -120,6 +120,7 @@ UniValue getrawtransaction(const JSONRPCRequest& request)
             "     }\n"
             "     ,...\n"
             "  ],\n"
+            "  \"flo-data\" : \"flo-data\",   (string, optional) FLO data field (default = \"\").\n"
             "  \"blockhash\" : \"hash\",   (string) the block hash\n"
             "  \"confirmations\" : n,      (numeric) The confirmations\n"
             "  \"time\" : ttt,             (numeric) The transaction time in seconds since epoch (Jan 1 1970 GMT)\n"
@@ -471,6 +472,7 @@ UniValue decoderawtransaction(const JSONRPCRequest& request)
             "     }\n"
             "     ,...\n"
             "  ],\n"
+            "  \"flo-data\" : \"flo-data\",   (string, optional) FLO data field (default = \"\").\n"
             "}\n"
 
             "\nExamples:\n"

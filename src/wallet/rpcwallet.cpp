@@ -270,8 +270,8 @@ UniValue setaccount(const JSONRPCRequest& request)
             "1. \"address\"         (string, required) The flo address to be associated with an account.\n"
             "2. \"account\"         (string, required) The account to assign the address to.\n"
             "\nExamples:\n"
-            + HelpExampleCli("setaccount", "\"LEr4hNAefWYhBMgxCFP2Po1NPrUeiK8kM2\" \"tabby\"")
-            + HelpExampleRpc("setaccount", "\"LEr4hNAefWYhBMgxCFP2Po1NPrUeiK8kM2\", \"tabby\"")
+            + HelpExampleCli("setaccount", "\"FQ5VFz73Ncw9chozAApnhppCpKhhYMX9vP\" \"tabby\"")
+            + HelpExampleRpc("setaccount", "\"FQ5VFz73Ncw9chozAApnhppCpKhhYMX9vP\", \"tabby\"")
         );
 
     LOCK2(cs_main, pwallet->cs_wallet);
@@ -318,8 +318,8 @@ UniValue getaccount(const JSONRPCRequest& request)
             "\nResult:\n"
             "\"accountname\"        (string) the account address\n"
             "\nExamples:\n"
-            + HelpExampleCli("getaccount", "\"LEr4hNAefWYhBMgxCFP2Po1NPrUeiK8kM2\"")
-            + HelpExampleRpc("getaccount", "\"LEr4hNAefWYhBMgxCFP2Po1NPrUeiK8kM2\"")
+            + HelpExampleCli("getaccount", "\"FQ5VFz73Ncw9chozAApnhppCpKhhYMX9vP\"")
+            + HelpExampleRpc("getaccount", "\"FQ5VFz73Ncw9chozAApnhppCpKhhYMX9vP\"")
         );
 
     LOCK2(cs_main, pwallet->cs_wallet);
@@ -445,10 +445,10 @@ UniValue sendtoaddress(const JSONRPCRequest& request)
             "\nResult:\n"
             "\"txid\"                  (string) The transaction id.\n"
             "\nExamples:\n"
-            + HelpExampleCli("sendtoaddress", "\"LEr4HnaefWYHbMGXcFp2Po1NPRUeIk8km2\" 0.1")
-            + HelpExampleCli("sendtoaddress", "\"LEr4HnaefWYHbMGXcFp2Po1NPRUeIk8km2\" 0.1 \"donation\" \"seans outpost\"")
-            + HelpExampleCli("sendtoaddress", "\"LEr4HnaefWYHbMGXcFp2Po1NPRUeIk8km2\" 0.1 \"\" \"\" true")
-            + HelpExampleRpc("sendtoaddress", "\"LEr4HnaefWYHbMGXcFp2Po1NPRUeIk8km2\", 0.1, \"donation\", \"seans outpost\"")
+            + HelpExampleCli("sendtoaddress", "\"FQ5VFz73Ncw9chozAApnhppCpKhhYMX9vP\" 0.1")
+            + HelpExampleCli("sendtoaddress", "\"FQ5VFz73Ncw9chozAApnhppCpKhhYMX9vP\" 0.1 \"donation\" \"seans outpost\"")
+            + HelpExampleCli("sendtoaddress", "\"FQ5VFz73Ncw9chozAApnhppCpKhhYMX9vP\" 0.1 \"\" \"\" true")
+            + HelpExampleRpc("sendtoaddress", "\"FQ5VFz73Ncw9chozAApnhppCpKhhYMX9vP\", 0.1, \"donation\", \"seans outpost\"")
         );
 
     LOCK2(cs_main, pwallet->cs_wallet);
@@ -575,11 +575,11 @@ UniValue signmessage(const JSONRPCRequest& request)
             "\nUnlock the wallet for 30 seconds\n"
             + HelpExampleCli("walletpassphrase", "\"mypassphrase\" 30") +
             "\nCreate the signature\n"
-            + HelpExampleCli("signmessage", "\"LEr4hNAefWYhBMgxCFP2Po1NPrUeiK8kM2\" \"my message\"") +
+            + HelpExampleCli("signmessage", "\"FQ5VFz73Ncw9chozAApnhppCpKhhYMX9vP\" \"my message\"") +
             "\nVerify the signature\n"
-            + HelpExampleCli("verifymessage", "\"LEr4hNAefWYhBMgxCFP2Po1NPrUeiK8kM2\" \"signature\" \"my message\"") +
+            + HelpExampleCli("verifymessage", "\"FQ5VFz73Ncw9chozAApnhppCpKhhYMX9vP\" \"signature\" \"my message\"") +
             "\nAs json rpc\n"
-            + HelpExampleRpc("signmessage", "\"LEr4hNAefWYhBMgxCFP2Po1NPrUeiK8kM2\", \"my message\"")
+            + HelpExampleRpc("signmessage", "\"FQ5VFz73Ncw9chozAApnhppCpKhhYMX9vP\", \"my message\"")
         );
 
     LOCK2(cs_main, pwallet->cs_wallet);
@@ -631,13 +631,13 @@ UniValue getreceivedbyaddress(const JSONRPCRequest& request)
             "amount   (numeric) The total amount in " + CURRENCY_UNIT + " received at this address.\n"
             "\nExamples:\n"
             "\nThe amount from transactions with at least 1 confirmation\n"
-            + HelpExampleCli("getreceivedbyaddress", "\"LEr4hNAefWYhBMgxCFP2Po1NPrUeiK8kM2\"") +
+            + HelpExampleCli("getreceivedbyaddress", "\"FQ5VFz73Ncw9chozAApnhppCpKhhYMX9vP\"") +
             "\nThe amount including unconfirmed transactions, zero confirmations\n"
-            + HelpExampleCli("getreceivedbyaddress", "\"LEr4hNAefWYhBMgxCFP2Po1NPrUeiK8kM2\" 0") +
+            + HelpExampleCli("getreceivedbyaddress", "\"FQ5VFz73Ncw9chozAApnhppCpKhhYMX9vP\" 0") +
             "\nThe amount with at least 6 confirmations\n"
-            + HelpExampleCli("getreceivedbyaddress", "\"LEr4hNAefWYhBMgxCFP2Po1NPrUeiK8kM2\" 6") +
+            + HelpExampleCli("getreceivedbyaddress", "\"FQ5VFz73Ncw9chozAApnhppCpKhhYMX9vP\" 6") +
             "\nAs a json rpc call\n"
-            + HelpExampleRpc("getreceivedbyaddress", "\"LEr4hNAefWYhBMgxCFP2Po1NPrUeiK8kM2\", 6")
+            + HelpExampleRpc("getreceivedbyaddress", "\"FQ5VFz73Ncw9chozAApnhppCpKhhYMX9vP\", 6")
        );
 
     LOCK2(cs_main, pwallet->cs_wallet);
@@ -884,16 +884,16 @@ UniValue sendfrom(const JSONRPCRequest& request)
             "6. \"comment_to\"        (string, optional) An optional comment to store the name of the person or organization \n"
             "                                     to which you're sending the transaction. This is not part of the transaction, \n"
             "                                     it is just kept in your wallet.\n"
-            "7. flo-data            (string, optional) Transaction comment (default = \"\").\n"
+            "7. flo-data            (string, optional) FLO data field (default = \"\").\n"
             "\nResult:\n"
             "\"txid\"                 (string) The transaction id.\n"
             "\nExamples:\n"
             "\nSend 0.01 " + CURRENCY_UNIT + " from the default account to the address, must have at least 1 confirmation\n"
-            + HelpExampleCli("sendfrom", "\"\" \"LEr4HnaefWYHbMGXcFp2Po1NPRUeIk8km2\" 0.01") +
+            + HelpExampleCli("sendfrom", "\"\" \"FQ5VFz73Ncw9chozAApnhppCpKhhYMX9vP\" 0.01") +
             "\nSend 0.01 from the tabby account to the given address, funds must have at least 6 confirmations\n"
-            + HelpExampleCli("sendfrom", "\"tabby\" \"LEr4HnaefWYHbMGXcFp2Po1NPRUeIk8km2\" 0.01 6 \"donation\" \"seans outpost\"") +
+            + HelpExampleCli("sendfrom", "\"tabby\" \"FQ5VFz73Ncw9chozAApnhppCpKhhYMX9vP\" 0.01 6 \"donation\" \"seans outpost\"") +
             "\nAs a json rpc call\n"
-            + HelpExampleRpc("sendfrom", "\"tabby\", \"LEr4HnaefWYHbMGXcFp2Po1NPRUeIk8km2\", 0.01, 6, \"donation\", \"seans outpost\"")
+            + HelpExampleRpc("sendfrom", "\"tabby\", \"FQ5VFz73Ncw9chozAApnhppCpKhhYMX9vP\", 0.01, 6, \"donation\", \"seans outpost\"")
         );
 
     LOCK2(cs_main, pwallet->cs_wallet);
@@ -970,19 +970,19 @@ UniValue sendmany(const JSONRPCRequest& request)
             "       \"UNSET\"\n"
             "       \"ECONOMICAL\"\n"
             "       \"CONSERVATIVE\"\n"
-            "9. flo-data             (string, optional) Transaction comment (default = \"\").\n"
+            "9. flo-data             (string, optional) FLO data field (default = \"\").\n"
             "\nResult:\n"
             "\"txid\"                   (string) The transaction id for the send. Only 1 transaction is created regardless of \n"
             "                                    the number of addresses.\n"
             "\nExamples:\n"
             "\nSend two amounts to two different addresses:\n"
-            + HelpExampleCli("sendmany", "\"\" \"{\\\"LEr4hNAefWYhBMgxCFP2Po1NPrUeiK8kM2\\\":0.01,\\\"LbhhnrHHVFP1eUjP1tdNIYeEVsNHfN9FCw\\\":0.02}\"") +
+            + HelpExampleCli("sendmany", "\"\" \"{\\\"FQ5VFz73Ncw9chozAApnhppCpKhhYMX9vP\\\":0.01,\\\"FJYCkfj4i9CayDosxhwTfLq5sqirx19kJV\\\":0.02}\"") +
             "\nSend two amounts to two different addresses setting the confirmation and comment:\n"
-            + HelpExampleCli("sendmany", "\"\" \"{\\\"LEr4hNAefWYhBMgxCFP2Po1NPrUeiK8kM2\\\":0.01,\\\"LbhhnrHHVFP1eUjP1tdNIYeEVsNHfN9FCw\\\":0.02}\" 6 \"testing\"") +
+            + HelpExampleCli("sendmany", "\"\" \"{\\\"FQ5VFz73Ncw9chozAApnhppCpKhhYMX9vP\\\":0.01,\\\"FJYCkfj4i9CayDosxhwTfLq5sqirx19kJV\\\":0.02}\" 6 \"testing\"") +
             "\nSend two amounts to two different addresses, subtract fee from amount:\n"
-            + HelpExampleCli("sendmany", "\"\" \"{\\\"LEr4hNAefWYhBMgxCFP2Po1NPrUeiK8kM2\\\":0.01,\\\"LbhhnrHHVFP1eUjP1tdNIYeEVsNHfN9FCw\\\":0.02}\" 1 \"\" \"[\\\"LEr4hNAefWYhBMgxCFP2Po1NPrUeiK8kM2\\\",\\\"LbhhnrHHVFP1eUjP1tdNIYeEVsNHfN9FCw\\\"]\"") +
+            + HelpExampleCli("sendmany", "\"\" \"{\\\"FQ5VFz73Ncw9chozAApnhppCpKhhYMX9vP\\\":0.01,\\\"FJYCkfj4i9CayDosxhwTfLq5sqirx19kJV\\\":0.02}\" 1 \"\" \"[\\\"FQ5VFz73Ncw9chozAApnhppCpKhhYMX9vP\\\",\\\"FJYCkfj4i9CayDosxhwTfLq5sqirx19kJV\\\"]\"") +
             "\nAs a json rpc call\n"
-            + HelpExampleRpc("sendmany", "\"\", \"{\\\"LEr4hNAefWYhBMgxCFP2Po1NPrUeiK8kM2\\\":0.01,\\\"LbhhnrHHVFP1eUjP1tdNIYeEVsNHfN9FCw\\\":0.02}\", 6, \"testing\"")
+            + HelpExampleRpc("sendmany", "\"\", \"{\\\"FQ5VFz73Ncw9chozAApnhppCpKhhYMX9vP\\\":0.01,\\\"FJYCkfj4i9CayDosxhwTfLq5sqirx19kJV\\\":0.02}\", 6, \"testing\"")
         );
 
     LOCK2(cs_main, pwallet->cs_wallet);
@@ -1113,9 +1113,9 @@ UniValue addmultisigaddress(const JSONRPCRequest& request)
 
             "\nExamples:\n"
             "\nAdd a multisig address from 2 addresses\n"
-            + HelpExampleCli("addmultisigaddress", "2 \"[\\\"LEr4hnAefwYhBmGxcFP2Po1NPrUEIk8KM2\\\",\\\"LYKr1oaPSqShthukmLDhdZsqUJgzVnQiAQ\\\"]\"") +
+            + HelpExampleCli("addmultisigaddress", "2 \"[\\\"FQ5VFz73Ncw9chozAApnhppCpKhhYMX9vP\\\",\\\"F6sCDMSJxKiKe5nxVVKJCepJJubdsdFHFK\\\"]\"") +
             "\nAs json rpc call\n"
-            + HelpExampleRpc("addmultisigaddress", "2, \"[\\\"LEr4hnAefwYhBmGxcFP2Po1NPrUEIk8KM2\\\",\\\"LYKr1oaPSqShthukmLDhdZsqUJgzVnQiAQ\\\"]\"")
+            + HelpExampleRpc("addmultisigaddress", "2, \"[\\\"FQ5VFz73Ncw9chozAApnhppCpKhhYMX9vP\\\",\\\"F6sCDMSJxKiKe5nxVVKJCepJJubdsdFHFK\\\"]\"")
         ;
         throw std::runtime_error(msg);
     }
@@ -1830,8 +1830,8 @@ UniValue listsinceblock(const JSONRPCRequest& request)
             "}\n"
             "\nExamples:\n"
             + HelpExampleCli("listsinceblock", "")
-            + HelpExampleCli("listsinceblock", "\"2c5a0ff9e4d8a7cdece6cc0f11d8f949a0c58b2028fab79b90485a811253e217\" 6")
-            + HelpExampleRpc("listsinceblock", "\"2c5a0ff9e4d8a7cdece6cc0f11d8f949a0c58b2028fab79b90485a811253e217\", 6")
+            + HelpExampleCli("listsinceblock", "\"e99f498b8e13e1d962140734ea1d363681ad2ddb9fe4237b850443fb6e6a9681\" 6")
+            + HelpExampleRpc("listsinceblock", "\"e99f498b8e13e1d962140734ea1d363681ad2ddb9fe4237b850443fb6e6a9681\", 6")
         );
 
     LOCK2(cs_main, pwallet->cs_wallet);
@@ -1959,9 +1959,9 @@ UniValue gettransaction(const JSONRPCRequest& request)
             "}\n"
 
             "\nExamples:\n"
-            + HelpExampleCli("gettransaction", "\"c1700d6dd3e690866de56686e893cbe4e637eb5d84e3591cdfbbdbb0fcee49f8\"")
-            + HelpExampleCli("gettransaction", "\"c1700d6dd3e690866de56686e893cbe4e637eb5d84e3591cdfbbdbb0fcee49f8\" true")
-            + HelpExampleRpc("gettransaction", "\"c1700d6dd3e690866de56686e893cbe4e637eb5d84e3591cdfbbdbb0fcee49f8\"")
+            + HelpExampleCli("gettransaction", "\"c447a8d53d76afc466b31e78ced51e49f6b143031b2e7892643404133ba9e249\"")
+            + HelpExampleCli("gettransaction", "\"c447a8d53d76afc466b31e78ced51e49f6b143031b2e7892643404133ba9e249\" true")
+            + HelpExampleRpc("gettransaction", "\"c447a8d53d76afc466b31e78ced51e49f6b143031b2e7892643404133ba9e249\"")
         );
 
     LOCK2(cs_main, pwallet->cs_wallet);
@@ -2020,8 +2020,8 @@ UniValue abandontransaction(const JSONRPCRequest& request)
             "1. \"txid\"    (string, required) The transaction id\n"
             "\nResult:\n"
             "\nExamples:\n"
-            + HelpExampleCli("abandontransaction", "\"c1700d6dd3e690866de56686e893cbe4e637eb5d84e3591cdfbbdbb0fcee49f8\"")
-            + HelpExampleRpc("abandontransaction", "\"c1700d6dd3e690866de56686e893cbe4e637eb5d84e3591cdfbbdbb0fcee49f8\"")
+            + HelpExampleCli("abandontransaction", "\"c447a8d53d76afc466b31e78ced51e49f6b143031b2e7892643404133ba9e249\"")
+            + HelpExampleRpc("abandontransaction", "\"c447a8d53d76afc466b31e78ced51e49f6b143031b2e7892643404133ba9e249\"")
         );
 
     LOCK2(cs_main, pwallet->cs_wallet);
@@ -2248,7 +2248,7 @@ UniValue walletlock(const JSONRPCRequest& request)
             "\nSet the passphrase for 2 minutes to perform a transaction\n"
             + HelpExampleCli("walletpassphrase", "\"my pass phrase\" 120") +
             "\nPerform a send (requires passphrase set)\n"
-            + HelpExampleCli("sendtoaddress", "\"LEr4HnaefWYHbMGXcFp2Po1NPRUeIk8km2\" 1.0") +
+            + HelpExampleCli("sendtoaddress", "\"FQ5VFz73Ncw9chozAApnhppCpKhhYMX9vP\" 1.0") +
             "\nClear the passphrase since we are done before 2 minutes is up\n"
             + HelpExampleCli("walletlock", "") +
             "\nAs json rpc call\n"
@@ -2368,13 +2368,13 @@ UniValue lockunspent(const JSONRPCRequest& request)
             "\nList the unspent transactions\n"
             + HelpExampleCli("listunspent", "") +
             "\nLock an unspent transaction\n"
-            + HelpExampleCli("lockunspent", "false \"[{\\\"txid\\\":\\\"daaf44ec1e64e66ffda4a7e195ea60d5c8c8b602fc6bf22928582d3ff2530462\\\",\\\"vout\\\":1}]\"") +
+            + HelpExampleCli("lockunspent", "false \"[{\\\"txid\\\":\\\"ba7c3a15065f48ddf9b163d1b417963d07ddfd3cd757e73ac9c2860a6d1b27f1\\\",\\\"vout\\\":1}]\"") +
             "\nList the locked transactions\n"
             + HelpExampleCli("listlockunspent", "") +
             "\nUnlock the transaction again\n"
-            + HelpExampleCli("lockunspent", "true \"[{\\\"txid\\\":\\\"daaf44ec1e64e66ffda4a7e195ea60d5c8c8b602fc6bf22928582d3ff2530462\\\",\\\"vout\\\":1}]\"") +
+            + HelpExampleCli("lockunspent", "true \"[{\\\"txid\\\":\\\"ba7c3a15065f48ddf9b163d1b417963d07ddfd3cd757e73ac9c2860a6d1b27f1\\\",\\\"vout\\\":1}]\"") +
             "\nAs a json rpc call\n"
-            + HelpExampleRpc("lockunspent", "false, \"[{\\\"txid\\\":\\\"daaf44ec1e64e66ffda4a7e195ea60d5c8c8b602fc6bf22928582d3ff2530462\\\",\\\"vout\\\":1}]\"")
+            + HelpExampleRpc("lockunspent", "false, \"[{\\\"txid\\\":\\\"ba7c3a15065f48ddf9b163d1b417963d07ddfd3cd757e73ac9c2860a6d1b27f1\\\",\\\"vout\\\":1}]\"")
         );
 
     LOCK2(cs_main, pwallet->cs_wallet);
@@ -2448,11 +2448,11 @@ UniValue listlockunspent(const JSONRPCRequest& request)
             "\nList the unspent transactions\n"
             + HelpExampleCli("listunspent", "") +
             "\nLock an unspent transaction\n"
-            + HelpExampleCli("lockunspent", "false \"[{\\\"txid\\\":\\\"daaf44ec1e64e66ffda4a7e195ea60d5c8c8b602fc6bf22928582d3ff2530462\\\",\\\"vout\\\":1}]\"") +
+            + HelpExampleCli("lockunspent", "false \"[{\\\"txid\\\":\\\"ba7c3a15065f48ddf9b163d1b417963d07ddfd3cd757e73ac9c2860a6d1b27f1\\\",\\\"vout\\\":1}]\"") +
             "\nList the locked transactions\n"
             + HelpExampleCli("listlockunspent", "") +
             "\nUnlock the transaction again\n"
-            + HelpExampleCli("lockunspent", "true \"[{\\\"txid\\\":\\\"daaf44ec1e64e66ffda4a7e195ea60d5c8c8b602fc6bf22928582d3ff2530462\\\",\\\"vout\\\":1}]\"") +
+            + HelpExampleCli("lockunspent", "true \"[{\\\"txid\\\":\\\"ba7c3a15065f48ddf9b163d1b417963d07ddfd3cd757e73ac9c2860a6d1b27f1\\\",\\\"vout\\\":1}]\"") +
             "\nAs a json rpc call\n"
             + HelpExampleRpc("listlockunspent", "")
         );
@@ -2681,8 +2681,8 @@ UniValue listunspent(const JSONRPCRequest& request)
 
             "\nExamples\n"
             + HelpExampleCli("listunspent", "")
-            + HelpExampleCli("listunspent", "6 9999999 \"[\\\"LGPYcOdyoBnraaWX5tknkJZZWafjRAGVzx\\\",\\\"LLmraTr3qBjE2YseA3CnZ55la4TQmWnRY3\\\"]\"")
-            + HelpExampleRpc("listunspent", "6, 9999999 \"[\\\"LGPYcOdyoBnraaWX5tknkJZZWafjRAGVzx\\\",\\\"LLmraTr3qBjE2YseA3CnZ55la4TQmWnRY3\\\"]\"")
+            + HelpExampleCli("listunspent", "6 9999999 \"[\\\"F7yrmxCmH7pCariTTA6dbqa5NpFB8qzbGe\\\",\\\"F718DyTeJkuNHMcFqY4LK142xmZGNU7tB5\\\"]\"")
+            + HelpExampleRpc("listunspent", "6, 9999999 \"[\\\"F7yrmxCmH7pCariTTA6dbqa5NpFB8qzbGe\\\",\\\"F718DyTeJkuNHMcFqY4LK142xmZGNU7tB5\\\"]\"")
             + HelpExampleCli("listunspent", "6 9999999 '[]' true '{ \"minimumAmount\": 0.005 }'")
             + HelpExampleRpc("listunspent", "6, 9999999, [] , true, { \"minimumAmount\": 0.005 } ")
         );
