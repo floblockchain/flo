@@ -164,7 +164,7 @@ UniValue generatetoaddress(const JSONRPCRequest& request)
             "1. nblocks      (numeric, required) How many blocks are generated immediately.\n"
             "2. address      (string, required) The address to send the newly generated flo to.\n"
             "3. maxtries     (numeric, optional) How many iterations to try (default = 1000000).\n"
-            "4. flo-data     (string, optional) Coinbase transaction flo-data (default = \"\").\n"
+            "4. floData     (string, optional) Coinbase transaction floData (default = \"\").\n"
             "\nResult:\n"
             "[ blockhashes ]     (array) hashes of blocks generated\n"
             "\nExamples:\n"
