@@ -102,8 +102,8 @@ public:
         // Deployment of SegWit (BIP141, BIP143, and BIP147)
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].bit = 1;
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nStartTime = 1517356801; // January 31st, 2018
-        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 0; // not using segwit
-//        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1530446401; // July 1, 2018  FLO future date
+//        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 0; // not using segwit
+        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1530446401; // July 1, 2018  FLO future date
 //        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1517356801; // January 31st, 2018
 
         // The best chain should have at least this much work.
@@ -254,7 +254,8 @@ public:
         // Deployment of SegWit (BIP141, BIP143, and BIP147)
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].bit = 1;
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nStartTime = 1483228800; // January 1, 2017
-        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 0; //must be 0 to not use segwit // 1530446401; // July 1, 2018  FLO future date
+//        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 0; //must be 0 to not use segwit // 1530446401;
+        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 1530446401; // July 1, 2018  FLO future date
 
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x000000000000000000000000000000000000000000000000000000083540886d");
