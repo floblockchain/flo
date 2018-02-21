@@ -102,8 +102,8 @@ public:
         // Deployment of SegWit (BIP141, BIP143, and BIP147)
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].bit = 1;
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nStartTime = 1517356801; // January 31st, 2018
-//        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 0; // not using segwit
-        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1530446401; // July 1, 2018  FLO future date
+        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 0; // not using segwit
+//        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1530446401; // July 1, 2018  FLO future date
 //        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1517356801; // January 31st, 2018
 
         // The best chain should have at least this much work.
@@ -240,8 +240,8 @@ public:
 //        consensus.nPowTargetSpacing = 40; // Florincoin: 40 seconds (~1/4x Litecoin: 2.5 minutes)
         consensus.fPowAllowMinDifficultyBlocks = true;
         consensus.fPowNoRetargeting = false;
-        consensus.nRuleChangeActivationThreshold = 6048; // 75% of 8064
-        consensus.nMinerConfirmationWindow = 8064; // nPowTargetTimespan / nPowTargetSpacing * 4  //TODO: this value would be 9 * 4, not 2016 *4; should value be 9?
+        consensus.nRuleChangeActivationThreshold = 600; // 75% of 800
+        consensus.nMinerConfirmationWindow = 800;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1199145601; // January 1, 2008
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1230767999; // December 31, 2008
@@ -254,8 +254,7 @@ public:
         // Deployment of SegWit (BIP141, BIP143, and BIP147)
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].bit = 1;
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nStartTime = 1483228800; // January 1, 2017
-//        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 0; //must be 0 to not use segwit // 1530446401;
-        consensus.vDeployments[Consensus::DEPLOYMENT_CSV].nTimeout = 1530446401; // July 1, 2018  FLO future date
+        consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1530446401;  // July 1, 2018  FLO future date
 
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x000000000000000000000000000000000000000000000000000000083540886d");
@@ -272,13 +271,13 @@ public:
         consensus.nMaxAdjustDown_Version1 = 300;
         consensus.nAveragingInterval_Version1 = consensus.nInterval_Version1;
         // V2
-        consensus.nHeight_Difficulty_Version2 = 208440;
+        consensus.nHeight_Difficulty_Version2 = 50000;
         consensus.nInterval_Version2 = 15;
         consensus.nMaxAdjustDown_Version2 = 300;
         consensus.nMaxAdjustUp_Version2 = 75;
         consensus.nAveragingInterval_Version2 = consensus.nInterval_Version2;
         // V3
-        consensus.nHeight_Difficulty_Version3 = 426000;
+        consensus.nHeight_Difficulty_Version3 = 60000;
         consensus.nInterval_Version3 = 1;
         consensus.nMaxAdjustDown_Version3 = 3;
         consensus.nMaxAdjustUp_Version3 = 2;
