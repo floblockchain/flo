@@ -461,14 +461,8 @@ static bool AcceptToMemoryPoolWorker(const CChainParams& chainparams, CTxMemPool
         return state.DoS(0, false, REJECT_NONSTANDARD, "no-witness-yet", true);
     }
 
-    if (tx.nVersion >= 2) {
-        int maxCommentLen = 528;
-        if (witnessEnabled) {
-            maxCommentLen = 1040;
-        }
-        if (tx.strFloData.length() > maxCommentLen) {
-            return state.DoS(0, false, REJECT_INVALID, "flo-data-too-large");
-        }
+    if (tx.strFloData.length() > CTransaction::MAX_FLO_DATA_SIZE) {
+        return state.DoS(0, false, REJECT_INVALID, "flo-data-too-large");
     }
 
     // Rather not work on nonstandard transactions (unless -testnet/-regtest)

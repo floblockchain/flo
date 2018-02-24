@@ -379,6 +379,10 @@ static void SendMoney(CWallet * const pwallet, const CTxDestination &address, CA
 {
     CAmount curBalance = pwallet->GetBalance();
 
+    if (strFloData.length() > CTransaction::MAX_FLO_DATA_SIZE) {
+        throw JSONRPCError(RPC_INVALID_PARAMETER, "Flo data too long");
+    }
+
     // Check amount
     if (nValue <= 0)
         throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid amount");
@@ -1064,6 +1068,10 @@ UniValue sendmany(const JSONRPCRequest& request)
     CAmount nBalance = pwallet->GetLegacyBalance(ISMINE_SPENDABLE, nMinDepth, &strAccount);
     if (totalAmount > nBalance)
         throw JSONRPCError(RPC_WALLET_INSUFFICIENT_FUNDS, "Account has insufficient funds");
+
+    if (strFloData.length() > CTransaction::MAX_FLO_DATA_SIZE) {
+        throw JSONRPCError(RPC_INVALID_PARAMETER, "Flo data too long");
+    }
 
     // Send
     CReserveKey keyChange(pwallet);

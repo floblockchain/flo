@@ -353,6 +353,10 @@ UniValue createrawtransaction(const JSONRPCRequest& request)
         rawTx.strFloData = request.params[4].get_str();
     }
 
+    if (rawTx.strFloData.length() > CTransaction::MAX_FLO_DATA_SIZE) {
+        throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter, Flo Data too large");
+    }
+
     for (unsigned int idx = 0; idx < inputs.size(); idx++) {
         const UniValue& input = inputs[idx];
         const UniValue& o = input.get_obj();
@@ -612,6 +616,9 @@ UniValue combinerawtransaction(const JSONRPCRequest& request)
     // starts as a clone of the rawtx:
     CMutableTransaction mergedTx(txVariants[0]);
     mergedTx.strFloData = strFloData;
+    if (mergedTx.strFloData.length() > CTransaction::MAX_FLO_DATA_SIZE) {
+        throw JSONRPCError(RPC_VERIFY_ERROR, "Flo Data too large");
+    }
 
     // Fetch previous transactions (inputs):
     CCoinsView viewDummy;
@@ -935,6 +942,11 @@ UniValue sendrawtransaction(const JSONRPCRequest& request)
     CMutableTransaction mtx;
     if (!DecodeHexTx(mtx, request.params[0].get_str()))
         throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "TX decode failed");
+
+    if (mtx.strFloData.length() > CTransaction::MAX_FLO_DATA_SIZE) {
+        throw JSONRPCError(RPC_TRANSACTION_ERROR, "Flo Data too large");
+    }
+
     CTransactionRef tx(MakeTransactionRef(std::move(mtx)));
     const uint256& hashTx = tx->GetHash();
 

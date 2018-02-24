@@ -19,6 +19,7 @@
 #include "base58.h"
 #include "chainparams.h"
 #include "wallet/coincontrol.h"
+#include "primitives/transaction.h" // FloData size limits
 #include "validation.h" // mempool and minRelayTxFee
 #include "ui_interface.h"
 #include "txmempool.h"
@@ -133,6 +134,8 @@ SendCoinsDialog::SendCoinsDialog(const PlatformStyle *_platformStyle, QWidget *p
     ui->customFee->setValue(settings.value("nTransactionFee").toLongLong());
     ui->checkBoxMinimumFee->setChecked(settings.value("fPayOnlyMinFee").toBool());
     minimizeFeeSection(settings.value("fFeeSectionMinimized").toBool());
+
+    ui->floData->setMaxLength(CTransaction::MAX_FLO_DATA_SIZE-5); // room for "text:" prefix
 }
 
 void SendCoinsDialog::setClientModel(ClientModel *_clientModel)
