@@ -287,7 +287,7 @@ public:
         vSeeds.clear();
 
         // nodes with support for servicebits filtering should be at the top
-//        vSeeds.emplace_back("69.172.229.163:17312", false);
+        vSeeds.emplace_back("testnet.oip.fun", false);
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,115);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,198);
