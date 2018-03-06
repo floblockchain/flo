@@ -151,26 +151,10 @@ public:
         assert(genesis.hashMerkleRoot == uint256S("0x730f0c8ddc5a592d5512566890e2a73e45feaa6748b24b849d1c29a7ab2b2300"));
 
         // Note that of those with the service bits flag, most only support a subset of possible options
-        // vSeeds.emplace_back("flo.seednode.net", true);
-
         vSeeds.emplace_back("seed1.florincoin.org", false);
-        vSeeds.emplace_back("seed2.florincoin.org", false);
-        vSeeds.emplace_back("seed3.florincoin.org", false);
-        vSeeds.emplace_back("seed4.florincoin.org", false);
-        vSeeds.emplace_back("seed5.florincoin.org", false);
-        vSeeds.emplace_back("seed6.florincoin.org", false);
-        vSeeds.emplace_back("seed7.florincoin.org", false);
-        vSeeds.emplace_back("seed8.florincoin.org", false);
-        vSeeds.emplace_back("seed1.florincoin.com", false);
-        vSeeds.emplace_back("seed2.florincoin.com", false);
-        vSeeds.emplace_back("seed3.florincoin.com", false);
-        vSeeds.emplace_back("seed4.florincoin.com", false);
-        vSeeds.emplace_back("nyc2.entertheblockchain.com", false);
-        vSeeds.emplace_back("sf1.entertheblockchain.com", false);
-        vSeeds.emplace_back("am2.entertheblockchain.com", false);
-        vSeeds.emplace_back("sgp.entertheblockchain.com", false);
-        vSeeds.emplace_back("ind.entertheblockchain.com", false);
-        vSeeds.emplace_back("de.entertheblockchain.com", false);
+        vSeeds.emplace_back("flodns.oip.li", false);
+        vSeeds.emplace_back("flodns.oip.fun", false);
+        vSeeds.emplace_back("flodns.seednode.net", false);
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,35);  //F
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,8);   //4
