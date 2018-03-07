@@ -348,7 +348,12 @@ Copy this file into the /home/debian/gitian-builder/inputs folder
 Getting and building the inputs
 --------------------------------
 
-At this point you have two options, you can either use the automated script (found in [contrib/gitian-build.sh](/contrib/gitian-build.sh)) or you could manually do everything by following this guide. If you're using the automated script, then run it with the "--setup" command. Afterwards, run it with the "--build" command (example: "contrib/gitian-build.sh -b signer 0.13.0"). Otherwise ignore this.
+At this point you have two options, you can either use the automated script (found in [contrib/gitian-build.sh](/contrib/gitian-build.sh)) or you could manually do everything by following this guide. If you're using the automated script, then run it with the "--setup" command. Afterwards, run it with the "--build" command (example: "contrib/gitian-build.sh -b signer 0.13.0"). Otherwise ignore this.  You can manually copy from flo/contrib/gitian-build.sh to the /home/debian folder and run it from there:
+```
+./gitian-build.sh --setup  signer 0.15.0.1
+./gitian-build.sh --build  signer 0.15.0.1
+```
+
 
 Follow the instructions in [doc/release-process.md](release-process.md#fetch-and-create-inputs-first-time-or-when-dependency-versions-change)
 in the flo repository under 'Fetch and create inputs' to install sources which require
