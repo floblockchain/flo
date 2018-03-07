@@ -340,10 +340,10 @@ There will be a lot of warnings printed during the build of the image. These can
 
 Special steps to build for Mac OSX
 ----------------------------------
-To comppile for the Mac OSX you will need to download the sdk from here:
+To compile for the Mac OSX you will need to download the sdk from here:
 https://github.com/phracker/MacOSX-SDKs/releases/download/10.13/MacOSX10.11.sdk.tar.xz
 
-Then it needs to go in the /home/debian/gitian-builder/inputs folder
+Copy this file into the /home/debian/gitian-builder/inputs folder
 
 Getting and building the inputs
 --------------------------------
