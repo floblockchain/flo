@@ -564,7 +564,6 @@ static void TxInErrorToJSON(const CTxIn& txin, UniValue& vErrorsRet, const std::
     vErrorsRet.push_back(entry);
 }
 
-// ToDo: FLO 0.15
 UniValue combinerawtransaction(const JSONRPCRequest& request)
 {
 

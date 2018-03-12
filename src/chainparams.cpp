@@ -83,12 +83,10 @@ public:
         consensus.BIP65Height = 1679161; // 490a10507efe42b89104408787088b7c43310cc230310201b5f57dac6f513b8b
         consensus.BIP66Height = 1679161; // 490a10507efe42b89104408787088b7c43310cc230310201b5f57dac6f513b8b
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
-//        consensus.nPowTargetTimespan = 360 // Florincoin: 60 minutes (Litecoin: 3.5 days)?
-//        consensus.nPowTargetSpacing = 40; // Florincoin: 40 seconds (~1/4x Litecoin: 2.5 minutes)
         consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.fPowNoRetargeting = false;
         consensus.nRuleChangeActivationThreshold = 6048; // 75% of 8064
-        consensus.nMinerConfirmationWindow = 8064; // nPowTargetTimespan / nPowTargetSpacing * 4  //TODO: this value would be 9 * 4, not 2016 *4; should value be 9?
+        consensus.nMinerConfirmationWindow = 8064;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1199145601; // January 1, 2008
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1230767999; // December 31, 2008
@@ -218,8 +216,6 @@ public:
         consensus.BIP65Height = 33600; // 4ac31d938531317c065405a9b23478c8c99204ff17fc294cb09821e2c2b42e65
         consensus.BIP66Height = 33600; // 4ac31d938531317c065405a9b23478c8c99204ff17fc294cb09821e2c2b42e65
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
-//        consensus.nPowTargetTimespan = 360 // Florincoin: 60 minutes (Litecoin: 3.5 days)?
-//        consensus.nPowTargetSpacing = 40; // Florincoin: 40 seconds (~1/4x Litecoin: 2.5 minutes)
         consensus.fPowAllowMinDifficultyBlocks = true;
         consensus.fPowNoRetargeting = false;
         consensus.nRuleChangeActivationThreshold = 600; // 75% of 800
@@ -290,8 +286,8 @@ public:
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,115);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,198);
-        base58Prefixes[SCRIPT_ADDRESS2] = std::vector<unsigned char>(1,58); // ToDo: bflorincoin?
-        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,239); // ToDo: bflorincoin?
+        base58Prefixes[SCRIPT_ADDRESS2] = std::vector<unsigned char>(1,58);
+        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,239);
         base58Prefixes[EXT_PUBLIC_KEY] = {0x01, 0x34, 0x40, 0xe2};  //Fput, Fprt for testnet
         base58Prefixes[EXT_SECRET_KEY] = {0x01, 0x34, 0x3c, 0x23};
 
@@ -331,7 +327,6 @@ public:
         consensus.BIP65Height = 1351; // BIP65 activated on regtest (Used in rpc activation tests)
         consensus.BIP66Height = 1251; // BIP66 activated on regtest (Used in rpc activation tests)
         consensus.powLimit = uint256S("7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
-//        consensus.nPowTargetSpacing = 2.5 * 60;
 
         consensus.fPowAllowMinDifficultyBlocks = true;
         consensus.fPowNoRetargeting = true;
