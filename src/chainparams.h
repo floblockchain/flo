@@ -53,6 +53,7 @@ public:
         SCRIPT_ADDRESS,
         SCRIPT_ADDRESS2,
         SECRET_KEY,
+        SECRET_KEY2,
         EXT_PUBLIC_KEY,
         EXT_SECRET_KEY,
 

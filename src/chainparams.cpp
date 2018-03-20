@@ -154,7 +154,8 @@ public:
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,35);  //F
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,8);   //4
         base58Prefixes[SCRIPT_ADDRESS2] = std::vector<unsigned char>(1,94); //e or f
-        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,163); //2
+        base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,163); //R
+        base58Prefixes[SECRET_KEY2] =    std::vector<unsigned char>(1,176); //T
         base58Prefixes[EXT_PUBLIC_KEY] = {0x01, 0x34, 0x40, 0x6b}; //Fpub, Fprv for mainnet
         base58Prefixes[EXT_SECRET_KEY] = {0x01, 0x34, 0x3c, 0x31};
 
@@ -288,6 +289,7 @@ public:
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,198);
         base58Prefixes[SCRIPT_ADDRESS2] = std::vector<unsigned char>(1,58);
         base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,239);
+        base58Prefixes[SECRET_KEY2] =    std::vector<unsigned char>(1,239);
         base58Prefixes[EXT_PUBLIC_KEY] = {0x01, 0x34, 0x40, 0xe2};  //Fput, Fprt for testnet
         base58Prefixes[EXT_SECRET_KEY] = {0x01, 0x34, 0x3c, 0x23};
 
@@ -397,6 +399,7 @@ public:
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,198);
         base58Prefixes[SCRIPT_ADDRESS2] = std::vector<unsigned char>(1,58);
         base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,239);
+        base58Prefixes[SECRET_KEY2] =    std::vector<unsigned char>(1,239);
         base58Prefixes[EXT_PUBLIC_KEY] = {0x04, 0x35, 0x87, 0xCF};
         base58Prefixes[EXT_SECRET_KEY] = {0x04, 0x35, 0x83, 0x94};
 
