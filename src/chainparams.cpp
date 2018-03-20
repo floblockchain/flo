@@ -147,6 +147,7 @@ public:
 
         // Note that of those with the service bits flag, most only support a subset of possible options
         vSeeds.emplace_back("seed1.florincoin.org", false);
+        vSeeds.emplace_back("node.oip.fun", false);
         vSeeds.emplace_back("flodns.oip.li", false);
         vSeeds.emplace_back("flodns.oip.fun", false);
         vSeeds.emplace_back("flodns.seednode.net", false);
