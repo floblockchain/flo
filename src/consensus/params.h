@@ -70,9 +70,9 @@ struct Params {
             return nTargetTimespan_Version1;
         // V2
         if (height < nHeight_Difficulty_Version3)
-            return nInterval_Version2 * nPowTargetSpacing;
+            return nAveragingInterval_Version2 * nPowTargetSpacing;
         // V3
-        return nInterval_Version3 * nPowTargetSpacing;
+        return nAveragingInterval_Version3 * nPowTargetSpacing;
     }
 
     int64_t DifficultyAdjustmentInterval(int height) const {
