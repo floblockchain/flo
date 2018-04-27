@@ -85,7 +85,7 @@ unsigned int CalculateNextWorkRequired(const CBlockIndex* pindexLast, int64_t nF
     if (fShift)
         bnNew >>= 1;
     bnNew *= nActualTimespan;
-    bnNew /= params.AveragingInterval(pindexLast->nHeight+1) * params.nPowTargetSpacing;
+    bnNew /= params.TargetTimespan(pindexLast->nHeight+1);
     if (fShift)
         bnNew <<= 1;
 
