@@ -139,6 +139,7 @@ public:
         pchMessageStart[3] = 0xf1;
         nDefaultPort = 7312;
         nPruneAfterHeight = 100000;
+        nNlrLimit = 100; // 100 * ~40s = ~66 minutes
 
         genesis = CreateGenesisBlock(1371488396, 1000112548, 0x1e0ffff0, 1, 100 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
@@ -275,6 +276,7 @@ public:
         pchMessageStart[3] = 0xf2;
         nDefaultPort = 17312;
         nPruneAfterHeight = 100000;
+        nNlrLimit = 50; // 50 * ~40s = ~33 minutes
 
         genesis = CreateGenesisBlock(1371387277, 1000580675, 0x1e0ffff0, 1, 100 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
@@ -389,6 +391,7 @@ public:
         pchMessageStart[3] = 0xda;
         nDefaultPort = 17412;
         nPruneAfterHeight = 1000;
+        nNlrLimit = 10;
 
         genesis = CreateGenesisBlock(1371387277, 0, 0x207fffff, 1, 100 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
