@@ -28,13 +28,7 @@ bool TransactionSignatureCreator::CreateSig(std::vector<unsigned char>& vchSig, 
     if (sigversion == SIGVERSION_WITNESS_V0 && !key.IsCompressed())
         return false;
 
-    int tempHashType = nHashType;
-    if (sigversion != SIGVERSION_WITNESS_V0) {
-        // Compatibility with v0.10.4 requires not signing the flo data
-        // Once v0.10.4 is sufficiently fazed out this should be removed
-        tempHashType |= SIGHASH_OMIT_FLO_DATA;
-    }
-    uint256 hash = SignatureHash(scriptCode, *txTo, nIn, tempHashType, amount, sigversion);
+    uint256 hash = SignatureHash(scriptCode, *txTo, nIn, nHashType, amount, sigversion);
     if (!key.Sign(hash, vchSig))
         return false;
     vchSig.push_back((unsigned char)nHashType);
