@@ -1457,7 +1457,7 @@ UniValue reconsiderblock(const JSONRPCRequest& request)
     }
 
     CValidationState state;
-    ActivateBestChain(state, Params());
+    ActivateBestChain(state, Params(), std::shared_ptr<const CBlock>(), true);
 
     if (!state.IsValid()) {
         throw JSONRPCError(RPC_DATABASE_ERROR, state.GetRejectReason());

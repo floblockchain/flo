@@ -310,6 +310,12 @@ class BitcoinTestFramework(object):
         connect_nodes_bi(self.nodes, 1, 2)
         self.sync_all()
 
+    def join_network_no_sync(self):
+        """
+        Join the (previously split) network halves together. Do not wait sync.
+        """
+        connect_nodes_bi(self.nodes, 1, 2)
+
     def sync_all(self, node_groups=None):
         if not node_groups:
             node_groups = [self.nodes]
