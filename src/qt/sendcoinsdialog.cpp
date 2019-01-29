@@ -266,8 +266,6 @@ void SendCoinsDialog::on_sendButton_clicked()
 
     // prepare transaction for getting txFee earlier
     std::string floData = ui->floData->text().toStdString();
-    if (!floData.empty())
-        floData = "text:" + floData;
     WalletModelTransaction currentTransaction(recipients, floData);
     WalletModel::SendCoinsReturn prepareStatus;
 
