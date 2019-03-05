@@ -967,12 +967,12 @@ UniValue sendrawtransaction(const JSONRPCRequest& request)
         bool fLimitFree = true;
         if (!AcceptToMemoryPool(mempool, state, std::move(tx), fLimitFree, &fMissingInputs, nullptr, false, nMaxRawTxFee)) {
             if (state.IsInvalid()) {
-                throw JSONRPCError(RPC_TRANSACTION_REJECTED, strprintf("%i: %s", state.GetRejectCode(), state.GetRejectReason()));
+                throw JSONRPCError(RPC_TRANSACTION_REJECTED, strprintf("Transaction not accepted to mempool (invalid state): %s", FormatStateMessage(state)));
             } else {
                 if (fMissingInputs) {
                     throw JSONRPCError(RPC_TRANSACTION_ERROR, "Missing inputs");
                 }
-                throw JSONRPCError(RPC_TRANSACTION_ERROR, state.GetRejectReason());
+                throw JSONRPCError(RPC_TRANSACTION_ERROR, strprintf("Transaction rejected from mempool: %s", FormatStateMessage(state)));
             }
         }
     } else if (fHaveChain) {
