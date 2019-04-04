@@ -1,5 +1,5 @@
 ---
-name: "flo-linux-0.15"
+name: "flo-linux-0.15.2.0"
 enable_cache: true
 suites:
 - "trusty"
