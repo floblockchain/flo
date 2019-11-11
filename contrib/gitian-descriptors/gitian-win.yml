@@ -1,5 +1,5 @@
 ---
-name: "flo-win-0.15.2.0"
+name: "flo-win-0.15.2.1"
 enable_cache: true
 suites:
 - "trusty"
